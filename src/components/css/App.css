@@ -10,10 +10,16 @@ body{
 
 nav {
   text-align: right;
+  margin-right: 10px;
 }
 
 nav a{
   color: white;
+  text-decoration: none;
+}
+
+nav a:hover{
+  text-shadow: 5px 2px 10px #ff0000;
 }
 
 li {
@@ -22,7 +28,14 @@ li {
   font-size: 10px;
 }
 
-.container {
+h5{
+  margin: 0;
+}
+
+.title {
+  text-align: left;
+}
+.container, .title {
   margin: 20px;
 }
 
@@ -37,6 +50,32 @@ li {
   padding: 12px;
   height: 80vh;
   color: black;
+}
+#create.home {
+  background-color: rgba(255, 255, 255, 0.9);
+  margin: 0 auto;
+  padding: 12px;
+  height: 100vh;
+  color: black;
+}
+
+.studio{
+  float: right;
+  width: 960px;
+  height: 80vh;
+  margin: 20px;
+  background-image: linear-gradient(45deg, #808080 25%, transparent 25%), linear-gradient(-45deg, #808080 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #808080 75%), linear-gradient(-45deg, transparent 75%, #808080 75%);
+  background-size: 20px 20px;
+  background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+}
+
+aside{
+  color: white;
+  background-color: black;
+  margin-left: 20px;
+  float: left;
+  width: 250px;
+  height: inherit;
 }
 
  img{

@@ -6,7 +6,13 @@ class Create extends Component {
   render(){
     return(
       <div>
-      <h3> Coming soon </h3>
+      <div className="home" id="create">
+      <aside>
+      coming soon
+      </aside>
+      <div className="studio">
+      </div>
+      </div>
       </div>
     )
   }
