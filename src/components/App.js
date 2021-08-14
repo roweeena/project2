@@ -20,13 +20,13 @@ function App() {
      <nav>
        <ul>
          <li>
-           <Link to="/">Home</Link>
+           <Link to="/">Home |</Link>
          </li>
          <li>
-           <Link to="/create">Create</Link>
+           <Link to="/create">Create |</Link>
          </li>
          <li>
-           <Link to="/sign-up">Sign up</Link>
+           <Link to="/sign-up">Sign up |</Link>
          </li>
          <li>
            <Link to="/log-in">Log in</Link>

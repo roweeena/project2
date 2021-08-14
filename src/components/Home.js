@@ -1,6 +1,19 @@
 import React, {Component} from 'react';
-
+import history from './history';
 class Home extends Component {
+  // constructor(){
+  //   super();
+  //   this.state = {
+  //     name: '',
+  //     class: '',
+  //     catchphrase:''
+  //   }
+  //   this._handleSubmit = this._handleSubmit.bind(this)
+  // }
+  // _handleSubmit(e){
+  //   e.preventDefault();
+  //   this.props.history.push('/create');
+  // }
   render(){
     return(
       <div>
@@ -16,7 +29,7 @@ class Home extends Component {
             <br/>
             Catchphrase:<input type="text"/>
             <br/>
-            <button>START</button>
+            <button type="submit" onClick={() => history.push('/create')}>START</button>
           </form>
         </div>
       </div>
