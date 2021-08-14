@@ -8,7 +8,20 @@ class Create extends Component {
       <div>
       <div className="home" id="create">
       <aside>
-      coming soon
+      <h4>Make a selection:</h4>
+      <select>
+        <option value="character">Character</option>
+        <option value="accessory">Accessory</option>
+        <option value="armour">Armor</option>
+        <option value="mount">Mount</option>
+        <option value="weapon">Weapon</option>
+      </select>
+      <select>
+      <option value=" "> (blank)</option>
+      </select>
+      <div className="items-render">
+      <p>Coming soon</p>
+      </div>
       </aside>
       <div className="studio">
       </div>

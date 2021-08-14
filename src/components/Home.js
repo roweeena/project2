@@ -16,9 +16,7 @@ class Home extends Component {
             <br/>
             Catchphrase:<input type="text"/>
             <br/>
-            <p><small>Select your gender:</small></p>
-            <img src="https://via.placeholder.com/150" alt="placeholder"/>
-            <img src="https://via.placeholder.com/150" alt="placeholder"/>
+            <button>START</button>
           </form>
         </div>
       </div>

@@ -70,8 +70,8 @@ h5{
 }
 
 aside{
-  color: white;
-  background-color: black;
+  color: #3C14D0;
+  border: 2px solid black;
   margin-left: 20px;
   float: left;
   width: 250px;
@@ -84,4 +84,58 @@ aside{
 
 input{
   margin: 5px;
+}
+
+select {
+        margin: 5px;
+        font-family: 'Press Start 2P', cursive;
+        letter-spacing: 1px;
+        border: 2px solid #3C14D0 ;
+        color: #3C14D0;
+        background: #fff;
+        padding: 10px 5px 10px;
+        width: 200px;
+        cursor: pointer;
+
+}
+button {
+        margin: 20px;
+        font-family: 'Press Start 2P', cursive;
+        letter-spacing: 1px;
+        text-decoration:none;
+        border: 4px solid #3C14D0 ;
+        color: #3C14D0;
+        background: #fff;
+        position: relative;
+        display: inline-block;
+        padding: 10px 5px 10px;
+        cursor: pointer;
+        width: auto;
+}
+button:after {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        border: 2px solid #3C14D0;
+        background-color: #3C14D0;
+        left: 4px;
+        top: 4px;
+        z-index: -1;
+        content: '';
+        -webkit-transition: all 0.5s;
+        -moz-transition: all 0.5s;
+        -o-transition: all 0.5s;
+}
+button:hover {
+          top:2px;
+          left:2px;
+}
+ button:hover:after{
+         top: -2px;
+         left: -2px;
+}
+
+.items-render{
+  border: inherit;
+  padding: 10px;
 }
