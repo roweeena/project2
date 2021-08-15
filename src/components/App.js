@@ -11,11 +11,12 @@ import Home from './Home'
 import Finished from './Finished'
 import Signup from './Signup'
 import Login from './Login'
+import history from './history';
 import './css/App.css';
 
 function App() {
   return (
-    <Router>
+    <Router history={history}>
      <div>
      <nav>
        <ul>

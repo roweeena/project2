@@ -6,6 +6,7 @@ body{
   background: url('https://i.pinimg.com/originals/cc/88/ae/cc88ae0924a0364e863894ce3b72650b.jpg') no-repeat center center fixed;
   background-size: cover;
   color: white;
+  text-shadow: 2px 0 10px #000;
 }
 
 nav {
@@ -49,14 +50,12 @@ h5{
   margin: 0 auto;
   padding: 12px;
   height: 80vh;
-  color: black;
 }
 #create.home {
   background-color: rgba(255, 255, 255, 0.9);
   margin: 0 auto;
   padding: 12px;
   height: 100vh;
-  color: black;
 }
 
 .studio{
@@ -70,7 +69,7 @@ h5{
 }
 
 aside{
-  color: #3C14D0;
+  color: white;
   border: 2px solid black;
   margin-left: 20px;
   float: left;
@@ -84,6 +83,7 @@ aside{
 
 input{
   margin: 5px;
+  border: 2px solid #3C14D0 ;
 }
 
 select {
@@ -97,6 +97,12 @@ select {
         width: 200px;
         cursor: pointer;
 
+}
+
+#home {
+  width: 100px;
+  font-size: 12px;
+  padding:5px;
 }
 button {
         margin: 20px;
@@ -135,6 +141,9 @@ button:hover {
          left: -2px;
 }
 
+.socials button{
+  background-color: none;
+}
 .items-render{
   border: inherit;
   padding: 10px;

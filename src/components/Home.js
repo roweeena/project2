@@ -25,7 +25,13 @@ class Home extends Component {
           <form>
             Name:<input type="text"/>
             <br/>
-            Class:<input type="text"/>
+            Class: <select>
+            <option value="magician">Magician</option>
+            <option value="thief">Thief</option>
+            <option value="warrior">Warrior</option>
+            <option value="bowman">Bowman</option>
+            <option value="pirate">Pirate</option>
+            </select>
             <br/>
             Catchphrase:<input type="text"/>
             <br/>
