@@ -1,6 +1,7 @@
-import React from "react";
+import React, {Component} from "react";
+import axios from 'axios';
 import {
-  BrowserRouter as Router,
+  HashRouter as Router,
   Switch,
   Route,
   Link
@@ -14,9 +15,51 @@ import Login from './Login'
 import history from './history';
 import './css/App.css';
 
-function App() {
+
+
+class App extends Component {
+constructor(props){
+  super(props);
+  this.state = {
+    isLoggedIn: false,
+    user: {}
+  };
+}
+
+componenetDidMount(){
+  this.loginStatus()
+}
+
+loginStatus=() =>{
+  axios.get('http://localhost:3001/logged_in',{withCredientials: true}).then(response => {
+    if(response.data.logged_in){
+      this.handleLogin(response)
+    }else {
+      this.handleLogout()
+    }
+  })
+  .catch(error => console.log('api errors:', error))
+}
+
+handleLogin = (data) => {
+    console.log("execute handleLogin()");
+    this.setState({
+      isLoggedIn: true,
+      user: data.user
+    })
+  }
+
+handleLogout = () => {
+  console.log("execute handleLogout()");
+  this.setState({
+    isLoggedIn: false,
+    user: {}
+  })
+}
+
+render(){
   return (
-    <Router history={history}>
+    <Router>
      <div>
      <nav>
        <ul>
@@ -47,18 +90,15 @@ function App() {
          <Route path="/finished">
            <Finished />
          </Route>
-         <Route path="/sign-up">
-           <Signup />
-         </Route>
-         <Route path="/log-in">
-           <Login />
-         </Route>
+        <Route exact path='/sign-up' component={(props) => <Signup {...props} handleLogin={this.handleLogin} /> } />
+         <Route exact path='/log-in' component={(props) => <Login {...props} handleLogin={this.handleLogin}/> } />
        </Switch>
      </div>
    </Router>
 
 
-  );
+    );
+  }
 }
 
 export default App;
