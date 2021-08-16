@@ -22,6 +22,8 @@ class Home extends Component {
         <div className = "form">
           <h3>Welcome!</h3>
           <p><small>Type in your character name, class and a catchprase! </small></p>
+          <p><small>Type in your character name, class and a catchprase! </small></p>
+          <p><small>Type in your character name, class and a catchprase! </small></p>
           <form>
             Name:<input type="text"/>
             <br/>
