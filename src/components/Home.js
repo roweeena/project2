@@ -1,5 +1,35 @@
 import React, {Component} from 'react';
 import history from './history';
+import axios from 'axios';
+import {Link} from 'react-router-dom';
+
+// const Home = (props) => {
+// const handleClick = () => {
+//     axios.delete('http://localhost:3001/logout', {withCredentials: true})
+//     .then(response => {
+//       props.handleLogout()
+//       props.history.push('/')
+//     })
+//     .catch(error => console.log(error))
+//   }
+// return (
+//
+//     <div>
+//       <Link to='/login'>Log In</Link>
+//       <br></br>
+//       <Link to='/signup'>Sign Up</Link>
+//       <br></br>
+//       {
+//         props.loggedInStatus ?
+//         <Link to='/logout' onClick={handleClick}>Log Out</Link> :
+//         null
+//       }
+//     </div>
+//   );
+//
+// };
+
+
 class Home extends Component {
   // constructor(){
   //   super();
@@ -21,8 +51,6 @@ class Home extends Component {
       <div className = "home">
         <div className = "form">
           <h3>Welcome!</h3>
-          <p><small>Type in your character name, class and a catchprase! </small></p>
-          <p><small>Type in your character name, class and a catchprase! </small></p>
           <p><small>Type in your character name, class and a catchprase! </small></p>
           <form>
             Name:<input type="text"/>
