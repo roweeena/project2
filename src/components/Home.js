@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
 import history from './history';
-import { Link } from 'react-router-dom';
-import Enter from './Enter'
+import axios from 'axios';
+import {Link} from 'react-router-dom';
+
+
 class Home extends Component {
 
   render(){
