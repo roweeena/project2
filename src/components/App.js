@@ -29,6 +29,10 @@ class App extends Component {
       this.loginStatus()
   }
 
+  getInfo = (data) => {
+    this.setState({name: data})
+  }
+
   handleClick = () => {
     axios.delete('http://localhost:3001/logout', {withCredentials: true})
     .then(response => {
