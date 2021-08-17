@@ -7,11 +7,14 @@ import {
   Link
 } from "react-router-dom";
 
-import Create from './Create'
 import Home from './Home'
+import Create from './Create'
+import Enter from './Enter'
 import Finished from './Finished'
 import Signup from './Signup'
 import Login from './Login'
+import Account from './Account'
+
 import history from './history';
 import './css/App.css';
 
@@ -22,12 +25,19 @@ constructor(props){
   super(props);
   this.state = {
     isLoggedIn: false,
-    user: {}
+    user: {},
+    name: '',
+    class: '',
+    catchphrase:''
   };
 }
 
 componenetDidMount(){
   this.loginStatus()
+}
+
+getInfo = (data)=>{
+  this.setState({name: data})
 }
 
 loginStatus=() =>{
@@ -59,7 +69,7 @@ handleLogout = () => {
 
 render(){
   return (
-    <Router>
+    <Router history={history}>
      <div>
      <nav>
        <ul>
@@ -78,21 +88,27 @@ render(){
         </ul>
        </nav>
        <div className = "title">
-       <h2>RPG Character Creator</h2>
+       <h2><Link to="/">RPG Character Creator</Link></h2>
        </div>
        <Switch>
-         <Route exact path="/">
-           <Home />
-         </Route>
+        <Route exact path="/" component={Home} />
+         <Route exact path="/enter" component={(props)=> <Enter {...props} getInfo={this.getInfo}/>} />
          <Route path="/create">
-           <Create />
+           <Create name={this.state.name} />
          </Route>
          <Route path="/finished">
            <Finished />
          </Route>
-        <Route exact path='/sign-up' component={(props) => <Signup {...props} handleLogin={this.handleLogin} /> } />
-         <Route exact path='/log-in' component={(props) => <Login {...props} handleLogin={this.handleLogin}/> } />
-       </Switch>
+         <Route path="/sign-up">
+            <Signup />
+          </Route>
+          <Route path="/log-in">
+            <Login />
+          </Route>
+          <Route path="/account">
+            <Account />
+          </Route>
+        </Switch>
      </div>
    </Router>
 
