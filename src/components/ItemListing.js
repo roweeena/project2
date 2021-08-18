@@ -33,17 +33,17 @@ class ItemListing extends Component {
             item => item.typeInfo.category),
             items => _.groupBy(items, item => item.typeInfo.subCategory)
         );
-        console.log(itemsList);
+        // console.log(itemsList);
         this.getCategories(itemsList);
         this.setState({itemsList: itemsList});
-        console.log("characterItems", characterItems);
+        // console.log("characterItems", characterItems);
 
         const itemNumbers = _.mapValues(itemsList, function(category) {return category.id;});
         const numbersTest = _.mapValues(
             characterItems,
             item => item.id
         );
-        this.itemRendering(itemsList, "Accessory", "Belt");
+        // this.itemRendering(itemsList, "Accessory", "Belt");
         // this.itemRendering(itemsList, this.state.selectedCategory, this.state.selectedSubcategory);
         // console.log("Item Numbers", itemNumbers);
         // console.log("Numbers Test", numbersTest);
@@ -52,14 +52,15 @@ class ItemListing extends Component {
 
     itemRendering (itemsList, chosenCategory, chosenSubcategory) {
       if (Object.keys(itemsList).length) {
-        console.log("TEST");
-        console.log(itemsList[chosenCategory][chosenSubcategory]);
+        // console.log("TEST");
+        // console.log(itemsList[chosenCategory][chosenSubcategory]);
         let itemsArray = itemsList[chosenCategory][chosenSubcategory].slice(0,100);
-        console.log(itemsArray);
+        // console.log(itemsArray);
 
         let imageArray = itemsArray.map(item => {
           // console.log(item.id);
-          return <img src={this.characterURL(item.id)} />
+          return <a href=""><img src={this.characterURL(item.id)} key={this.characterURL(item.id)} onClick={this.setAvatarItems} /> </a>
+          // return <button><img src={this.characterURL(item.id)} alt="alt text" key={this.characterURL(item.id)} onClick={this.setAvatarItems} /> </button>
         });
         return imageArray;
       }
@@ -78,6 +79,11 @@ class ItemListing extends Component {
       return `https://maplestory.io/api/GMS/224/item/${name}/icon`;
     }
 
+    setAvatarItems(e) {
+      e.preventDefault();
+      console.log("HEY FROM setAvatarItems");
+    }
+
 
   //
   //
@@ -94,7 +100,7 @@ getCategories(topItems) {
 }
 
 _handleChange(e){
-  console.log("items list", this.state.itemsList)
+  console.log("items list", this.state.itemsList);
   this.setState({selectedCategory: e.target.value}, () => {
     this.getSubCategories(this.state.selectedCategory);
     console.log('is this null',this.state.selectedCategory);
@@ -102,14 +108,15 @@ _handleChange(e){
 }
 
 getSubCategories(s){
-  console.log('s',s)
-  console.log("subcategory", this.state.itemsList)
-  this.setState({subCategoryNames: Object.keys(this.state.itemsList[s]) })
-  console.log(Object.keys(this.state.itemsList[s]));
+  console.log('s',s);
+  console.log("subcategory ItemsList", this.state.itemsList);
+  this.setState({subCategoryNames: Object.keys(this.state.itemsList[s]) });
+  console.log("getSubCategories", Object.keys(this.state.itemsList[s]));
 }
 
 _handleSubChange(e){
   this.setState({selectedSubcategory: e.target.value});
+  console.log("_handleSubChange");
 }
 
   // let subCategory = Object.keys(this.itemsList[this.state.selectedCategory])
@@ -127,11 +134,11 @@ _handleSubChange(e){
           <h4>Make a selection:</h4>
             <select onChange={this._handleChange}>
               <option disabled value=" "> </option>
-                {this.state.categoryNames.map((item)=> (<option  value={item}>{item} </option>))}
+                {this.state.categoryNames.map((item)=> (<option  value={item} key={item}>{item} </option>))}
             </select>
             <select onChange={this._handleSubChange} >
               <option disabled value=" "></option>
-                {this.state.subCategoryNames.map((item)=> (<option  value={item}>{item} </option>))}
+                {this.state.subCategoryNames.map((item)=> (<option  value={item} key={item}>{item} </option>))}
             </select>
           <div className="items-render">
             {this.state.selectedCategory && this.state.selectedSubcategory ?
