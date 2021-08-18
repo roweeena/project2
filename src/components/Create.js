@@ -20,7 +20,6 @@ class Create extends Component {
 
   }
 
-
   urlGenerator (array) {
     let results = [];
     array.map(id => {
@@ -44,10 +43,9 @@ class Create extends Component {
           </div>
             <div className="studio">
 
-            <img src={this.characterURL(this.urlGenerator([2000,12000,1040007,1092009]))} />
+            <img src={this.characterURL(this.urlGenerator([2000,12000]))} />
             </div>
-            <ItemListing />
-
+            <ItemListing /> 
           </div>
         </div>
       )

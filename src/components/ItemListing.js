@@ -20,6 +20,7 @@ class ItemListing extends Component {
     this.getSubCategories = this.getSubCategories.bind(this);
     this._handleChange = this._handleChange.bind(this);
     this._handleSubChange = this._handleSubChange.bind(this);
+    this._handleClear = this._handleClear.bind(this);
   }
 
   componentDidMount(){
@@ -79,19 +80,11 @@ class ItemListing extends Component {
       return `https://maplestory.io/api/GMS/224/item/${name}/icon`;
     }
 
-<<<<<<< HEAD
-=======
     setAvatarItems(e) {
       e.preventDefault();
       console.log("HEY FROM setAvatarItems");
     }
 
-
-  //
-  //
-  //
-
->>>>>>> 3ad2f50b3bf27f30822664460dc64c2493aeb160
 getCategories(topItems) {
       let category = Object.keys(topItems); //gives back top-level categories
       console.log("Some categories",category);
@@ -121,8 +114,15 @@ _handleSubChange(e){
   this.setState({selectedSubcategory: e.target.value});
   console.log("_handleSubChange");
 }
-//handleSave
-//handleClear
+_handleSave(){
+  console.log('save')
+}
+_handleClear(e){
+  this.setState({selectedCategory: '',
+  selectedSubcategory: '',
+  subCategoryNames:[]})
+  console.log('clear')
+}
 
   render() {
 
@@ -131,7 +131,6 @@ _handleSubChange(e){
         <aside>
           <h4>Make a selection:</h4>
             <select onChange={this._handleChange}>
-<<<<<<< HEAD
               < option selected="true" disabled="disabled"> </option>
                 {this.state.categoryNames.map((item)=> (<option  value={item}>{item} </option>))}
 
@@ -140,14 +139,6 @@ _handleSubChange(e){
             < option selected="true" disabled="disabled"> </option>
                 {this.state.subCategoryNames.map((item)=> (<option  value={item}>{item} </option>))}
 
-=======
-              <option disabled value=" "> </option>
-                {this.state.categoryNames.map((item)=> (<option  value={item} key={item}>{item} </option>))}
-            </select>
-            <select onChange={this._handleSubChange} >
-              <option disabled value=" "></option>
-                {this.state.subCategoryNames.map((item)=> (<option  value={item} key={item}>{item} </option>))}
->>>>>>> 3ad2f50b3bf27f30822664460dc64c2493aeb160
             </select>
           <div className="items-render">
             {this.state.selectedCategory && this.state.selectedSubcategory ?
@@ -155,8 +146,8 @@ _handleSubChange(e){
 
           </div>
           <div className="studioButtons">
-            <button> Save </button>
-            <button> Clear </button>
+            <button onClick={this._handleSave}> Save </button>
+            <button onClick={this._handleClear}> Clear </button>
           </div>
         </aside>
       </div>
