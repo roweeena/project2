@@ -3,89 +3,65 @@ import React, {Component} from 'react';
 import _ from 'lodash';
 import axios from 'axios';
 
-// const itemListPromise = fetch(`https://maplestory.io/api/GMS/224/item/category/equip`)
-//   .then(res => res.json());
-//
-// window.itemListPromise = itemListPromise;
-// console.log(itemListPromise);
-
-
-
-// const groupedHair = _.map(
-//         _.groupBy(
-//           itemListPromise.filter(item => item.id >= 30000 && item.id <= 60000),
-//           item => Math.floor(item.id / 10)
-//         ), itemGrouping => {
-//           const firstItem = itemGrouping[0]
-//           firstItem.similar = itemGrouping
-//           return firstItem
-//         }
-//       )
-
-// https://maplestory.io/api/GMS/224/item/1040007/icon
-
 class ItemListing extends Component {
   constructor() {
     super();
     this.state = {
       items: [],
-      categories: {},
-      categoryNames: {},
-      selectedCategory: null
+      itemsList: {},
+      categoryNames: [],
+      subCategoryNames: [],
+      selectedCategory: null,
+      selectedSubcategory: null
     }
     // this.fetchIcon = this.fetchIcon.bind(this);
     this.itemRendering = this.itemRendering.bind(this);
+    this.getCategories = this.getCategories.bind(this);
+    this._handleChange = this._handleChange.bind(this);
   }
 
   componentDidMount(){
-
-
     let characterItems = {};
     axios.get('https://maplestory.io/api/GMS/224/item/category/equip')
       .then((response) => {
         characterItems = response.data;
-        const categories = _.mapValues(
+        const itemsList = _.mapValues(
           _.groupBy(
             characterItems,
             item => item.typeInfo.category),
             items => _.groupBy(items, item => item.typeInfo.subCategory)
         );
-        console.log("categories", categories);
-        this.setState({categories: categories});
+        console.log(itemsList);
+        this.getCategories(itemsList);
+        this.setState({itemsList: itemsList});
         console.log("characterItems", characterItems);
 
-        const itemNumbers = _.mapValues(categories, function(category) {return category.id;});
+        const itemNumbers = _.mapValues(itemsList, function(category) {return category.id;});
         const numbersTest = _.mapValues(
             characterItems,
             item => item.id
         );
-        this.itemRendering(categories, "Accessory", "Belt");
-        // this.itemRendering(categories, this.state.selectedCategory, this.state.selectedSubcategory);
+        this.itemRendering(itemsList, "Accessory", "Belt");
+        // this.itemRendering(itemsList, this.state.selectedCategory, this.state.selectedSubcategory);
         // console.log("Item Numbers", itemNumbers);
         // console.log("Numbers Test", numbersTest);
       });
-
-
   }
 
-
-
-    itemRendering (categories, chosenCategory, chosenSubcategory) {
-      if (Object.keys(categories).length) {
+    itemRendering (itemsList, chosenCategory, chosenSubcategory) {
+      if (Object.keys(itemsList).length) {
         console.log("TEST");
-        console.log(categories[chosenCategory][chosenSubcategory]);
-        let itemsArray = categories[chosenCategory][chosenSubcategory].slice(0,100);
+        console.log(itemsList[chosenCategory][chosenSubcategory]);
+        let itemsArray = itemsList[chosenCategory][chosenSubcategory].slice(0,100);
         console.log(itemsArray);
 
         let imageArray = itemsArray.map(item => {
-          console.log(item.id);
+          // console.log(item.id);
           return <img src={this.characterURL(item.id)} />
         });
         return imageArray;
       }
     }
-
-
 
     urlGenerator (array) {
       let results = [];
@@ -128,27 +104,41 @@ class ItemListing extends Component {
   //   }
 
 
+getCategories(topItems) {
+      let category = Object.keys(topItems); //gives back top-level categories
+      console.log("Some categories",category);
+      this.setState({categoryNames: category})
+}
 
+getSubCategories(s){
+  let subCategory = Object.keys(s[this.state.selectedCategory])
+
+  // let subCategory = Object.keys(category.map(item=> {
+  //   console.log(Object.keys(categories[item])) //access categories' subCategories
+  }
+
+
+_handleChange(e){
+  this.setState({selectedCategory: e.target.value});
+}
 
   render() {
+
     return (
       <div className = "item-select">
         <aside>
           <h4>Make a selection:</h4>
-            <select>
+            <select onChange={this._handleChange}>
               <option value=" "></option>
-              <option value="character">Character</option>
-              <option value="accessory">Accessory</option>
-              <option value="armour">Armor</option>
-              <option value="mount">Mount</option>
-              <option value="weapon">Weapon</option>
+                {this.state.categoryNames.map((item)=> (<option  value={item}>{item} </option>))}
             </select>
             <select>
-              <option value=" "> (blank)</option>
+              <option value=" "> </option>
+
             </select>
           <div className="items-render">
-            <p>Coming soon</p>
-            {this.itemRendering(this.state.categories, "Accessory", "Belt")}
+
+            {this.itemRendering(this.state.itemsList, "Accessory", "Belt")}
           </div>
           <div className="studioButtons">
             <button> Save </button>

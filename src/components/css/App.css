@@ -96,7 +96,7 @@ input{
 }
 
 select {
-  margin: 5px;
+  margin: 0 0 5px;
  font-family: 'Press Start 2P', cursive;
   font-size:12px;
  letter-spacing: 1px;
@@ -169,19 +169,21 @@ button:hover {
 
 .studioButtons > button{
   font-size: 10px;
-  margin-right: 12px;
-  margin: 10px;
-}
 
-.items-render{
-  border: inherit;
-  padding: 10px;
+  margin: 5px 4px 5px;
 }
-
 
 .account{
   text-align: left;
   padding: 10px;
+}
+
+.items-render{
+  margin: auto;
+  border: 2px solid #3C14D0;
+  height: 350px;
+  padding: 10px;
+  overflow-y: auto;
 }
 
 @media screen and (min-width: 500px) {
