@@ -1,10 +1,12 @@
 import React, {Component} from 'react';
+import history from './history'
 import Enter from './Enter'
 
 class Create extends Component {
-  constructor(){
-    super();
+  constructor(props){
+    super(props);
   this.state = {
+    isLoggedIn: false,
     name: '',
     class: '',
     catchphrase:''
@@ -13,9 +15,9 @@ class Create extends Component {
 //download/save to account function
 
   render(){
+    if (this.props.isLoggedIn){
     return(
       <div>
-
       <div className="home" id="create">
         <div className="test">
       <h5> {this.props.name}</h5>
@@ -50,6 +52,13 @@ class Create extends Component {
         </div>
       </div>
     )
+  } else {
+    return(
+      <div>
+      <h3>You don't have access to this page. Please log in or sign up to start creating your character.</h3>
+      </div>
+    )
+  }
   }
 }
 

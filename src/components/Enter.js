@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
+import history from './history'
 
 class Enter extends Component {
-  constructor(){
-    super();
+  constructor(props){
+    super(props);
     this.state = {
       name: '',
       class: '',
@@ -52,7 +53,7 @@ class Enter extends Component {
           <form onSubmit={this._handleSubmit}>
             Name:<input type="text" onChange={this._renderName} value={this.state.name} required={true}/>
             <br/>
-            Class: <select onChange={this._renderClass} value={this.state.class} required={true}>
+            Class: <select onChange={this._renderClass} value={this.state.class}>
             <option value="Choose an option"></option>
             <option value="magician">Magician</option>
             <option value="thief">Thief</option>

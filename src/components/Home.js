@@ -10,7 +10,7 @@ class Home extends Component {
     return(
         <div id="enter">
         <img src="https://i.pinimg.com/originals/ec/f9/c5/ecf9c521d2ca6970e9d13e25505fd95d.gif" height='100px' alt=""/>
-        <Link to="/enter">
+        <Link to="/login">
         <button>
             Enter
           </button>

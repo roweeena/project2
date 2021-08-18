@@ -14,6 +14,7 @@ class Signup extends Component {
      };
   }
 
+
   handleChange = (event) => {
     const {name, value} = event.target
     this.setState({
@@ -45,7 +46,7 @@ class Signup extends Component {
   };
 
   redirect = () => {
-    this.props.history.push('/')
+    this.props.history.push('/enter')
   }
 
   handleErrors = () => {
