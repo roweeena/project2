@@ -78,11 +78,6 @@ class ItemListing extends Component {
       return `https://maplestory.io/api/GMS/224/item/${name}/icon`;
     }
 
-
-  //
-  //
-  //
-
 getCategories(topItems) {
       let category = Object.keys(topItems); //gives back top-level categories
       console.log("Some categories",category);
@@ -111,13 +106,8 @@ getSubCategories(s){
 _handleSubChange(e){
   this.setState({selectedSubcategory: e.target.value});
 }
-
-  // let subCategory = Object.keys(this.itemsList[this.state.selectedCategory])
-//   //   console.log("subCategory", subCategory)
-//    let subCategory = Object.keys(itemsList.map(item=> {
-//    console.log(Object.keys(itemsList[item])) //access categories' subCategories
-//  })
-// )
+//handleSave
+//handleClear
 
   render() {
 
@@ -126,12 +116,14 @@ _handleSubChange(e){
         <aside>
           <h4>Make a selection:</h4>
             <select onChange={this._handleChange}>
-              <option disabled value=" "> </option>
+              < option selected="true" disabled="disabled"> </option>
                 {this.state.categoryNames.map((item)=> (<option  value={item}>{item} </option>))}
+
             </select>
             <select onChange={this._handleSubChange} >
-              <option disabled value=" "></option>
+            < option selected="true" disabled="disabled"> </option>
                 {this.state.subCategoryNames.map((item)=> (<option  value={item}>{item} </option>))}
+
             </select>
           <div className="items-render">
             {this.state.selectedCategory && this.state.selectedSubcategory ?
