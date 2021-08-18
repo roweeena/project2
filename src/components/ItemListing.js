@@ -16,6 +16,7 @@ class ItemListing extends Component {
     // this.fetchIcon = this.fetchIcon.bind(this);
     this.itemRendering = this.itemRendering.bind(this);
     this.getCategories = this.getCategories.bind(this);
+    this.getSubCategories = this.getSubCategories.bind(this);
     this._handleChange = this._handleChange.bind(this);
   }
 
@@ -80,33 +81,42 @@ class ItemListing extends Component {
   };
 
 
-
-  urlGenerator (array) {
-    let results = [];
-    array.map(id => {
-      results.push(`${ this.state }`);
-    })
-    console.log(results.join(","));
-    return results.join(",");
-  };
+  //
+  //
+  //
 
 getCategories(topItems) {
       let category = Object.keys(topItems); //gives back top-level categories
       console.log("Some categories",category);
       this.setState({categoryNames: category})
+   //    let subCategory = Object.keys(category.map(item=> {
+   //    console.log(Object.keys(topItems[item])) //access categories' subCategories
+   //  })
+   // )
 }
-
-getSubCategories(s){
-  let subCategory = Object.keys(s[this.state.selectedCategory])
-
-  // let subCategory = Object.keys(category.map(item=> {
-  //   console.log(Object.keys(categories[item])) //access categories' subCategories
-  }
-
 
 _handleChange(e){
+  console.log("items list", this.state.itemsList)
   this.setState({selectedCategory: e.target.value});
+  this.getSubCategories();
+
 }
+
+getSubCategories(){
+  console.log("subcategory", this.state.itemsList)
+  console.log('is this null',this.state.selectedCategory);
+  // console.log(Object.keys(s[this.state.selectedCategory]));
+
+  // let subCategory = Object.keys(this.itemsList[this.state.selectedCategory])
+//   //   console.log("subCategory", subCategory)
+//    let subCategory = Object.keys(itemsList.map(item=> {
+//    console.log(Object.keys(itemsList[item])) //access categories' subCategories
+//  })
+// )
+}
+
+
+
 
   render() {
 
