@@ -14,10 +14,10 @@ class Create extends Component {
 
     this.characterURL = this.characterURL.bind(this);
 
-    const characterItems = [{'itemId':2000,'version':'224'},{'itemId':12000,'version':'224'}];
+    const allItems = [{'itemId':2000,'version':'224'},{'itemId':12000,'version':'224'}];
     // const characterURL = `https://maplestory.io/api/character/${this.urlGenerator([2000,12000])}/stand1/0?showears=false&showLefEars=false&showHighLefEars=undefined&resize=1&name=&flipX=false&bgColor=0,0,0,0`;
     // console.log(characterURL);
-    // console.log(...characterItems);
+    // console.log(...allItems);
     // this.urlGenerator([2000,12000]);
   }
 //download/save to account function
