@@ -1,11 +1,13 @@
 import React, {Component} from 'react';
+import history from './history'
 import Enter from './Enter'
 import ItemListing from './ItemListing'
 
 class Create extends Component {
-  constructor(){
-    super();
+  constructor(props){
+    super(props);
   this.state = {
+    isLoggedIn: false,
     name: '',
     class: '',
     catchphrase:'',
@@ -47,24 +49,31 @@ class Create extends Component {
 // items url https://maplestory.io/api/GMS/224/item/category/equip
 
   render(){
-    return(
-      <div>
-
-        <div className="home" id="create">
-          <div className="test">
-            <h5> {this.props.name}</h5>
+    if (this.props.isLoggedIn) {
+      return(
+        <div>
+          <div className="home" id="create">
+            <div className="test">
+          <h5> {this.props.name}</h5>
           </div>
+            <div className="studio">
 
-          <div className="studio">
+            <img src={this.characterURL(this.urlGenerator([2000,12000,1040007,1092009]))} />
+            </div>
+            <ItemListing />
 
-          <img src={this.characterURL(this.urlGenerator([2000,12000,1040007,1092009]))} />
           </div>
-          <ItemListing />
-
         </div>
+      )
+    } else {
+      return(
+      <div>
+      <h3>You don't have access to this page. Please log in or sign up to start creating your character.</h3>
       </div>
-    )
+      )
+    }
   }
 }
+
 
 export default Create

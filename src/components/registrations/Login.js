@@ -11,10 +11,17 @@ class Login extends Component {
       password: '',
       errors: ''
      };
+     this.getAccount=this.getAccount.bind(this);
   }
   componentWillMount() {
+    this.getAccount();
     return this.props.loggedInStatus ? this.redirect() : null
   }
+
+  getAccount(data){
+    this.setState({email: data})
+  }
+
   handleChange = (event) => {
     const {name, value} = event.target
     this.setState({
@@ -67,7 +74,6 @@ class Login extends Component {
         <div className="form">
         <form onSubmit={this.handleSubmit}>
           Email: <input
-            placeholder="email"
             type="text"
             name="email"
             value={email}
@@ -75,7 +81,6 @@ class Login extends Component {
           />
           <br/>
           Password:<input
-            placeholder="password"
             type="password"
             name="password"
             value={password}
