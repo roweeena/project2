@@ -10,14 +10,15 @@ class ItemListing extends Component {
       itemsList: {},
       categoryNames: [],
       subCategoryNames: [],
-      selectedCategory: null,
-      selectedSubcategory: null
+      selectedCategory: '',
+      selectedSubcategory: ''
     }
     // this.fetchIcon = this.fetchIcon.bind(this);
     this.itemRendering = this.itemRendering.bind(this);
     this.getCategories = this.getCategories.bind(this);
     this.getSubCategories = this.getSubCategories.bind(this);
     this._handleChange = this._handleChange.bind(this);
+    this._handleSubChange = this._handleSubChange.bind(this);
   }
 
   componentDidMount(){
@@ -97,15 +98,22 @@ getCategories(topItems) {
 
 _handleChange(e){
   console.log("items list", this.state.itemsList)
-  this.setState({selectedCategory: e.target.value});
-  this.getSubCategories();
-
+  this.setState({selectedCategory: e.target.value}, () => {
+    this.getSubCategories(this.state.selectedCategory);
+    console.log('is this null',this.state.selectedCategory);
+  });
 }
 
-getSubCategories(){
+getSubCategories(s){
+  console.log('s',s)
   console.log("subcategory", this.state.itemsList)
-  console.log('is this null',this.state.selectedCategory);
-  // console.log(Object.keys(s[this.state.selectedCategory]));
+  this.setState({subCategoryNames: Object.keys(this.state.itemsList[s]) })
+  console.log(Object.keys(this.state.itemsList[s]));
+}
+
+_handleSubChange(e){
+  this.setState({selectedSubcategory: e.target.value});
+}
 
   // let subCategory = Object.keys(this.itemsList[this.state.selectedCategory])
 //   //   console.log("subCategory", subCategory)
@@ -113,10 +121,6 @@ getSubCategories(){
 //    console.log(Object.keys(itemsList[item])) //access categories' subCategories
 //  })
 // )
-}
-
-
-
 
   render() {
 
@@ -125,16 +129,17 @@ getSubCategories(){
         <aside>
           <h4>Make a selection:</h4>
             <select onChange={this._handleChange}>
-              <option value=" "></option>
+              <option disabled value=" "> </option>
                 {this.state.categoryNames.map((item)=> (<option  value={item}>{item} </option>))}
             </select>
-            <select>
-              <option value=" "> </option>
-
+            <select onChange={this._handleSubChange} >
+              <option disabled value=" "></option>
+                {this.state.subCategoryNames.map((item)=> (<option  value={item}>{item} </option>))}
             </select>
           <div className="items-render">
+            {this.state.selectedCategory && this.state.selectedSubcategory ?
+            this.itemRendering(this.state.itemsList, this.state.selectedCategory, this.state.selectedSubcategory) : null}
 
-            {this.itemRendering(this.state.itemsList, "Accessory", "Belt")}
           </div>
           <div className="studioButtons">
             <button> Save </button>
