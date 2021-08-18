@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+// import _ from 'underscore';
 import _ from 'lodash';
 import axios from 'axios';
 
@@ -60,9 +61,9 @@ class ItemListing extends Component {
           // console.log(item.id);
           return <img src={this.characterURL(item.id)} />
         });
-    };
-    fetchItemList();
-  };
+        return imageArray;
+      }
+    }
 
     urlGenerator (array) {
       let results = [];
@@ -73,13 +74,9 @@ class ItemListing extends Component {
       return results.join(",");
     }
 
-      let imageArray = itemsArray.map(item => {
-        // console.log(item.id);
-        return <img src={this.characterURL(item.id)} />
-      });
-      return imageArray;
+    characterURL (name) {
+      return `https://maplestory.io/api/GMS/224/item/${name}/icon`;
     }
-  };
 
 
   //
@@ -149,6 +146,7 @@ _handleSubChange(e){
       </div>
     );
   }
+
 }
 
 
