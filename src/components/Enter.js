@@ -16,7 +16,7 @@ class Enter extends Component {
     this.getInfo = this.getInfo.bind(this);
   }
 
-  getInfo(data){
+  getInfo = (data) => {
     this.setState({name: data})
   }
 
@@ -36,7 +36,8 @@ class Enter extends Component {
 
   _handleSubmit(e){
     e.preventDefault();
-    this.props.getInfo(this.state.name) //
+    this.props.getInfo(this.state.name); //
+    console.log("this.props.getInfo(this.state.name)");
     this.setState({name: '', catchprase: '', class: ''})
     this.props.history.push('/create');
   }
