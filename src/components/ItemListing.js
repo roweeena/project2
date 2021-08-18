@@ -20,6 +20,7 @@ class ItemListing extends Component {
     this.getSubCategories = this.getSubCategories.bind(this);
     this._handleChange = this._handleChange.bind(this);
     this._handleSubChange = this._handleSubChange.bind(this);
+    this.setAvatarItems = this.setAvatarItems.bind(this);
   }
 
   componentDidMount(){
@@ -50,81 +51,91 @@ class ItemListing extends Component {
       });
   }
 
-    itemRendering (itemsList, chosenCategory, chosenSubcategory) {
-      if (Object.keys(itemsList).length) {
-        // console.log("TEST");
-        // console.log(itemsList[chosenCategory][chosenSubcategory]);
-        let itemsArray = itemsList[chosenCategory][chosenSubcategory].slice(0,100);
-        // console.log(itemsArray);
+  itemRendering (itemsList, chosenCategory, chosenSubcategory) {
+    if (Object.keys(itemsList).length) {
+      // console.log("TEST");
+      // console.log(itemsList[chosenCategory][chosenSubcategory]);
+      let itemsArray = itemsList[chosenCategory][chosenSubcategory].slice(0,100);
+      // console.log(itemsArray);
 
-        let imageArray = itemsArray.map(item => {
-          // console.log(item.id);
-          return <a href=""><img src={this.characterURL(item.id)} key={this.characterURL(item.id)} onClick={this.setAvatarItems} /> </a>
-          // return <button><img src={this.characterURL(item.id)} alt="alt text" key={this.characterURL(item.id)} onClick={this.setAvatarItems} /> </button>
-        });
-        return imageArray;
-      }
+      let imageArray = itemsArray.map(item => {
+        // console.log(item.id);
+        return <a href=""><img src={this.characterURL(item.id)} key={this.characterURL(item.id)} onClick={(event) => {
+          this.setAvatarItems(event, item.id);
+        }} /> </a>
+        // return <button><img src={this.characterURL(item.id)} alt="alt text" key={this.characterURL(item.id)} onClick={this.setAvatarItems} /> </button>
+      });
+      return imageArray;
     }
+  }
 
-    urlGenerator (array) {
-      let results = [];
-      array.map(id => {
-        results.push(`${ this.state }`);
-      })
-      console.log(results.join(","));
-      return results.join(",");
-    }
+  urlGenerator (array) {
+    let results = [];
+    array.map(id => {
+      results.push(`${ this.state }`);
+    })
+    console.log(results.join(","));
+    return results.join(",");
+  }
 
-    characterURL (name) {
-      return `https://maplestory.io/api/GMS/224/item/${name}/icon`;
-    }
+  characterURL (name) {
+    return `https://maplestory.io/api/GMS/224/item/${name}/icon`;
+  }
 
-    setAvatarItems(e) {
-      e.preventDefault();
-      console.log("HEY FROM setAvatarItems");
-    }
+  setAvatarItems(event,itemId) {
+    event.preventDefault();
+    console.log("HEY FROM setAvatarItems", event, itemId);
+    // this.props.onClick(itemId);
+    this.setState({items: itemId});
+    this.props.avatarItems(itemId);
+
+  }
+
+  // addItem = (data) => {
+  //   this.setState({items: data})
+  // };
 
 
   //
   //
   //
 
-getCategories(topItems) {
-      let category = Object.keys(topItems); //gives back top-level categories
-      console.log("Some categories",category);
-      this.setState({categoryNames: category})
-   //    let subCategory = Object.keys(category.map(item=> {
-   //    console.log(Object.keys(topItems[item])) //access categories' subCategories
-   //  })
-   // )
-}
+  getCategories(topItems) {
+        let category = Object.keys(topItems); //gives back top-level categories
+        console.log("Some categories",category);
+        this.setState({categoryNames: category})
+     //    let subCategory = Object.keys(category.map(item=> {
+     //    console.log(Object.keys(topItems[item])) //access categories' subCategories
+     //  })
+     // )
+  }
 
-_handleChange(e){
-  console.log("items list", this.state.itemsList);
-  this.setState({selectedCategory: e.target.value}, () => {
-    this.getSubCategories(this.state.selectedCategory);
-    console.log('is this null',this.state.selectedCategory);
-  });
-}
+  _handleChange(e){
+    console.log("items list", this.state.itemsList);
+    this.setState({selectedCategory: e.target.value}, () => {
+      this.getSubCategories(this.state.selectedCategory);
+      console.log('is this null',this.state.selectedCategory);
+    });
+  }
 
-getSubCategories(s){
-  console.log('s',s);
-  console.log("subcategory ItemsList", this.state.itemsList);
-  this.setState({subCategoryNames: Object.keys(this.state.itemsList[s]) });
-  console.log("getSubCategories", Object.keys(this.state.itemsList[s]));
-}
+  getSubCategories(s){
+    console.log('s',s);
+    console.log("subcategory ItemsList", this.state.itemsList);
+    this.setState({subCategoryNames: Object.keys(this.state.itemsList[s]) });
+    console.log("getSubCategories", Object.keys(this.state.itemsList[s]));
+  }
 
-_handleSubChange(e){
-  this.setState({selectedSubcategory: e.target.value});
-  console.log("_handleSubChange");
-}
+  _handleSubChange(e){
+    this.setState({selectedSubcategory: e.target.value});
+    console.log("_handleSubChange");
+  }
 
-  // let subCategory = Object.keys(this.itemsList[this.state.selectedCategory])
-//   //   console.log("subCategory", subCategory)
-//    let subCategory = Object.keys(itemsList.map(item=> {
-//    console.log(Object.keys(itemsList[item])) //access categories' subCategories
-//  })
-// )
+    // let subCategory = Object.keys(this.itemsList[this.state.selectedCategory])
+  //   //   console.log("subCategory", subCategory)
+  //    let subCategory = Object.keys(itemsList.map(item=> {
+  //    console.log(Object.keys(itemsList[item])) //access categories' subCategories
+  //  })
+  // )
 
   render() {
 
