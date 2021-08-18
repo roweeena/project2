@@ -110,6 +110,7 @@ class ItemListing extends Component {
      // )
   }
 
+
   _handleChange(e){
     console.log("items list", this.state.itemsList);
     this.setState({selectedCategory: e.target.value}, () => {
@@ -144,11 +145,11 @@ class ItemListing extends Component {
         <aside>
           <h4>Make a selection:</h4>
             <select onChange={this._handleChange}>
-              <option disabled value=" "> </option>
+              <option selected="true" disabled="disabled"> </option>
                 {this.state.categoryNames.map((item)=> (<option  value={item} key={item}>{item} </option>))}
             </select>
             <select onChange={this._handleSubChange} >
-              <option disabled value=" "></option>
+              <option selected="true" disabled="disabled"></option>
                 {this.state.subCategoryNames.map((item)=> (<option  value={item} key={item}>{item} </option>))}
             </select>
           <div className="items-render">
