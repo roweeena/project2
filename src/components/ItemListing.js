@@ -1,13 +1,14 @@
 import React, {Component} from 'react';
-// import _ from 'underscore';
 import _ from 'lodash';
 import axios from 'axios';
+import Finished from './Finished'
 
 class ItemListing extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       items: [],
+      itemsId: props.itemId,
       itemsList: {},
       categoryNames: [],
       subCategoryNames: [],
@@ -20,6 +21,8 @@ class ItemListing extends Component {
     this.getSubCategories = this.getSubCategories.bind(this);
     this._handleChange = this._handleChange.bind(this);
     this._handleSubChange = this._handleSubChange.bind(this);
+    this._handleClear = this._handleClear.bind(this);
+    this.share = this.share.bind(this);
     this.setAvatarItems = this.setAvatarItems.bind(this);
   }
 
@@ -37,20 +40,10 @@ class ItemListing extends Component {
         // console.log(itemsList);
         this.getCategories(itemsList);
         this.setState({itemsList: itemsList});
-        // console.log("characterItems", characterItems);
 
-        const itemNumbers = _.mapValues(itemsList, function(category) {return category.id;});
-        const numbersTest = _.mapValues(
-            characterItems,
-            item => item.id
-        );
-        // this.itemRendering(itemsList, "Accessory", "Belt");
-        // this.itemRendering(itemsList, this.state.selectedCategory, this.state.selectedSubcategory);
-        // console.log("Item Numbers", itemNumbers);
-        // console.log("Numbers Test", numbersTest);
       });
   }
-
+//this renders the items in the aside
   itemRendering (itemsList, chosenCategory, chosenSubcategory) {
     if (Object.keys(itemsList).length) {
       // console.log("TEST");
@@ -60,7 +53,7 @@ class ItemListing extends Component {
 
       let imageArray = itemsArray.map(item => {
         // console.log(item.id);
-        return <a href=""><img src={this.characterURL(item.id)} key={this.characterURL(item.id)} onClick={(event) => {
+        return <a href="" key={item.id}><img src={this.characterURL(item.id)} key={this.characterURL(item.id)}alt="Maplestory item" onClick={(event) => {
           this.setAvatarItems(event, item.id);
         }} /> </a>
         // return <button><img src={this.characterURL(item.id)} alt="alt text" key={this.characterURL(item.id)} onClick={this.setAvatarItems} /> </button>
@@ -91,23 +84,12 @@ class ItemListing extends Component {
 
   }
 
-  // addItem = (data) => {
-  //   this.setState({items: data})
-  // };
-
-
-  //
-  //
-  //
-
   getCategories(topItems) {
         let category = Object.keys(topItems); //gives back top-level categories
         console.log("Some categories",category);
-        this.setState({categoryNames: category})
-     //    let subCategory = Object.keys(category.map(item=> {
-     //    console.log(Object.keys(topItems[item])) //access categories' subCategories
-     //  })
-     // )
+        this.setState({categoryNames: category});
+        // this.setState({selectedCategory: category[0]});
+        // this.getSubCategories(category[0], topItems);
   }
 
 
@@ -126,19 +108,44 @@ class ItemListing extends Component {
     this.setState({subCategoryNames: Object.keys(this.state.itemsList[s]) });
     console.log("getSubCategories", Object.keys(this.state.itemsList[s]));
   }
+  // getSubCategories(s, topItems=this.state.itemsList){ //default
+  //   console.log('s',s);
+  //   console.log("subcategory ItemsList", topItems);
+  //   let itemCategory = Object.keys(topItems[s])
+  //   this.setState({subCategoryNames: itemCategory, selectedSubcategory: itemCategory[0] });
+  //   console.log("getSubCategories", Object.keys(topItems[s]));
+  //   return Object.keys(topItems[s]);
+  // }
 
+  _handleChange(e){
+    console.log("items list", this.state.itemsList);
+    this.setState({selectedSubcategory: ""})
+    this.setState({selectedCategory: e.target.value}, () => {
+      // let subCategory = this.getSubCategories(this.state.selectedCategory);
+      this.getSubCategories(this.state.selectedCategory)
+      // this.setState({selectedSubcategory: subCategory[0] });
+      // console.log('is this null',this.state.selectedCategory);
+    });
+  }
   _handleSubChange(e){
     this.setState({selectedSubcategory: e.target.value});
     console.log("_handleSubChange");
   }
 
-    // let subCategory = Object.keys(this.itemsList[this.state.selectedCategory])
-  //   //   console.log("subCategory", subCategory)
-  //    let subCategory = Object.keys(itemsList.map(item=> {
-  //    console.log(Object.keys(itemsList[item])) //access categories' subCategories
-  //  })
-  // )
+  _handleSave(){
+    console.log('save')
+  }
 
+  _handleClear(){
+    this.props.handleClear();
+  }
+
+
+  share(e){
+    e.preventDefault();
+
+    this.props.history.push('/finished');
+  }
   render() {
 
     return (
@@ -159,8 +166,10 @@ class ItemListing extends Component {
 
           </div>
           <div className="studioButtons">
-            <button> Save </button>
-            <button> Clear </button>
+            <button onClick={this._handleSave}> Save </button>
+
+            <button onClick={this._handleClear}> Clear </button>
+            <button onClick={this.share}> Share </button>
           </div>
         </aside>
       </div>

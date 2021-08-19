@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import _ from 'lodash';
-import history from './history'
-import Enter from './Enter'
 import ItemListing from './ItemListing'
+import Finished from './Finished'
+
 
 class Create extends Component {
   constructor(props){
@@ -12,15 +12,13 @@ class Create extends Component {
     name: '',
     class: '',
     catchphrase:'',
-    itemId: []
+    itemId: [],
+    img: ''
     }
 
     this.characterURL = this.characterURL.bind(this);
-
-    const allItems = [{'itemId':2000,'version':'224'},{'itemId':12000,'version':'224'}];
-    // axios.get('http://localhost:3001/characters', );
+    this._handleClear = this._handleClear.bind(this);
   }
-
 
   urlGenerator (array) {
     let results = [];
@@ -28,11 +26,14 @@ class Create extends Component {
       results.push(`{'itemId':${ id },'version':'224'}`);
     })
     console.log(results.join(","));
-    return results.join(",");
+    const characterImage = results.join(",")
+    return characterImage;
   }
 
-  characterURL (name) {
+  characterURL (name, url) {
+
     return `https://maplestory.io/api/character/${name}/stand1/0?showears=false&showLefEars=false&showHighLefEars=undefined&resize=1&name=&flipX=false&bgColor=0,0,0,0`;
+    this.setState({img: url  })
   }
 
   _handleItemIds = (itemValue) => {
@@ -40,21 +41,27 @@ class Create extends Component {
       console.log("_handleItemIds", this.state.itemId);
     }
 
+    _handleClear(e){
+      this.setState({
+        itemId: []
+      })
+    }
+
+
   render(){
     if (this.props.isLoggedIn) {
       return(
         <div>
           <div className="home" id="create">
-            <div className="test">
-          <h5> {this.props.name}</h5>
-          </div>
+            <h5> {this.props.name}</h5>
+
             <div className="studio">
-
-            <img src={this.characterURL(this.urlGenerator(_.flatten([2000,12000,this.state.itemId])))} />
+            <img src={this.characterURL(this.urlGenerator(_.flatten([2000,12000,this.state.itemId])))} alt="character image" />
             </div>
-            <ItemListing avatarItems={ this._handleItemIds }/>
+            <ItemListing avatarItems={ this._handleItemIds } itemId={this.state.itemId} handleClear={this._handleClear}/>
 
           </div>
+
         </div>
       )
     } else {

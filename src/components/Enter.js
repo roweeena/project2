@@ -6,6 +6,7 @@ class Enter extends Component {
   constructor(props){
     super(props);
     this.state = {
+      isLoggedIn: false,
       name: '',
       job: '',
       catchphrase:''
@@ -48,6 +49,7 @@ class Enter extends Component {
 
 
   render(){
+
     return(
       <div>
       <br/>
@@ -74,6 +76,7 @@ class Enter extends Component {
         </div>
       </div>
     </div>
+
     )
   }
 }

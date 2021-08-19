@@ -41,7 +41,7 @@ constructor(props){
    }
 
    handleClick = () => { //logging out
-   axios.delete('http://localhost:3001/logout', {withCredentials: true})
+   axios.delete('https://rpg-generator-backend.herokuapp.com/logout', {withCredentials: true})
    .then(response => {
    this.handleLogout()
    this.history.push('/')
@@ -50,7 +50,7 @@ constructor(props){
    }
 
    loginStatus = () => {
-   axios.get('http://localhost:3001/logged_in', {withCredentials: true})
+   axios.get('https://rpg-generator-backend.herokuapp.com/logged_in', {withCredentials: true})
    .then(response => {
    if (response.data.logged_in) {
      this.handleLogin(response)
@@ -126,7 +126,7 @@ constructor(props){
 
         {this.state.isLoggedIn &&
       <Route path="/finished">
-        <Finished />
+        <Finished get={this.state.itemId}/>
       </Route>
     }
         {this.state.isLoggedIn &&

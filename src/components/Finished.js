@@ -13,13 +13,14 @@ import {FacebookShareButton,
 
 
 class Finished extends Component {
+
   render(){
-    const url = 'http://localhost:3000/'; //change to deployed url
+    const url = 'https://roweeena.github.io/project2'; //change to deployed url
    const title = 'RPG Character Creator';
     return(
     <div>
       <div className = "home">
-        <h2>(Character name)</h2>
+        <h2>{this.props.name})</h2>
           <img src="https://via.placeholder.com/400" alt="Finished product"/>
           <h5>Share your avatar</h5>
           <div className = "socials">
