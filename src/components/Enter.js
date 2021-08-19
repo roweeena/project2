@@ -43,7 +43,7 @@ class Enter extends Component {
     this.setState({name: '', catchphrase: '', job: ''});
     this.props.history.push('/create');
 
-    axios.post('http://localhost:3001/characters', {name: this.state.name,
+    axios.post('https://rpg-generator-backend.herokuapp.com/characters', {name: this.state.name,
     catchphrase: this.state.catchphrase, job: this.state.job, user_id: this.props.user.id}, {withCredentials: true});
   };
 
