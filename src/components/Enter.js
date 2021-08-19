@@ -46,6 +46,7 @@ class Enter extends Component {
     this.setState({name: '', catchphrase: '', job: ''});
     this.props.history.push('/create');
 
+
     axios.post(SERVERURL+'/characters', {name: this.state.name,
     catchphrase: this.state.catchphrase, job: this.state.job, user_id: this.props.user.id}, {withCredentials: true});
   };

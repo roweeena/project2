@@ -23,16 +23,17 @@ import './css/App.css';
 const SERVERURL = 'http://localhost:3001';
 
 class App extends Component {
-  constructor(props){
-    super(props);
-    this.state = {
-      isLoggedIn: false,
-      user: {},
-      name: '',
-      class: '',
-      catchphrase:''
-    };
-  }
+constructor(props){
+  super(props);
+  this.state = {
+    isLoggedIn: false,
+    user: {},
+    name: '',
+    class: '',
+    catchphrase:'',
+    imgUrl: ''
+  };
+}
 
   componentDidMount(){
    this.loginStatus()
@@ -42,14 +43,18 @@ class App extends Component {
    this.setState({name: data})
   }
 
-  handleClick = () => { //logging out
-    axios.delete(SERVERURL+'/logout', {withCredentials: true})
-    .then(response => {
-    this.handleLogout()
-    this.history.push('/')
-    })
-    .catch(error => console.log(error))
-  }
+   getImage = (data) =>{
+     this.setState({imgUrl: data})
+   }
+
+   handleClick = () => { //logging out
+   axios.delete(SERVERURL+'/logout', {withCredentials: true})
+   .then(response => {
+   this.handleLogout()
+   this.history.push('/')
+   })
+   .catch(error => console.log(error))
+   }
 
   loginStatus = () => {
     axios.get(SERVERURL+'/logged_in', {withCredentials: true})
@@ -120,14 +125,14 @@ class App extends Component {
         }
 
         <Route path="/create">
-          <Create name={this.state.name} isLoggedIn={this.state.isLoggedIn} />
+          <Create name={this.state.name} isLoggedIn={this.state.isLoggedIn} getImage={this.getImage} />
         </Route>
 
         {this.state.isLoggedIn &&
-          <Route path="/finished">
-            <Finished get={this.state.itemId}/>
-          </Route>
-        }
+      <Route path="/finished">
+        <Finished get={this.state.itemId} imgUrl={this.state.imgUrl}/>
+      </Route>
+    }
         {this.state.isLoggedIn &&
           <Route path="/account" >
             <Account user={this.state.user} />

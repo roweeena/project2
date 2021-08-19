@@ -20,8 +20,8 @@ class Finished extends Component {
     return(
     <div>
       <div className = "home">
-        <h2>{this.props.name})</h2>
-          <img src="https://via.placeholder.com/400" alt="Finished product"/>
+        <h2>{this.props.name}</h2>
+          <img src={this.props.imgUrl} alt="Finished product"/>
           <h5>Share your avatar</h5>
           <div className = "socials">
           <FacebookShareButton url={url} quote={title} >
