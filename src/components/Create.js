@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import _ from 'lodash';
 import ItemListing from './ItemListing'
+import Finished from './Finished'
+
 
 class Create extends Component {
   constructor(props){
@@ -10,7 +12,8 @@ class Create extends Component {
     name: '',
     class: '',
     catchphrase:'',
-    itemId: []
+    itemId: [],
+    img: ''
     }
 
     this.characterURL = this.characterURL.bind(this);
@@ -23,11 +26,14 @@ class Create extends Component {
       results.push(`{'itemId':${ id },'version':'224'}`);
     })
     console.log(results.join(","));
-    return results.join(",");
+    const characterImage = results.join(",")
+    return characterImage;
   }
 
-  characterURL (name) {
+  characterURL (name, url) {
+
     return `https://maplestory.io/api/character/${name}/stand1/0?showears=false&showLefEars=false&showHighLefEars=undefined&resize=1&name=&flipX=false&bgColor=0,0,0,0`;
+    this.setState({img: url  })
   }
 
   _handleItemIds = (itemValue) => {
@@ -41,6 +47,7 @@ class Create extends Component {
       })
     }
 
+
   render(){
     if (this.props.isLoggedIn) {
       return(
@@ -49,7 +56,7 @@ class Create extends Component {
             <h5> {this.props.name}</h5>
 
             <div className="studio">
-            <img src={this.characterURL(this.urlGenerator(_.flatten([2000,12000,this.state.itemId])))} alt="item images" />
+            <img src={this.characterURL(this.urlGenerator(_.flatten([2000,12000,this.state.itemId])))} alt="character image" />
             </div>
             <ItemListing avatarItems={ this._handleItemIds } itemId={this.state.itemId} handleClear={this._handleClear}/>
 

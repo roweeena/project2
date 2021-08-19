@@ -126,7 +126,7 @@ constructor(props){
 
         {this.state.isLoggedIn &&
       <Route path="/finished">
-        <Finished />
+        <Finished get={this.state.itemId}/>
       </Route>
     }
         {this.state.isLoggedIn &&

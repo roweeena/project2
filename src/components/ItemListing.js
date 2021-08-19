@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-// import _ from 'underscore';
 import _ from 'lodash';
 import axios from 'axios';
+import Finished from './Finished'
 
 class ItemListing extends Component {
   constructor(props) {
@@ -22,6 +22,7 @@ class ItemListing extends Component {
     this._handleChange = this._handleChange.bind(this);
     this._handleSubChange = this._handleSubChange.bind(this);
     this._handleClear = this._handleClear.bind(this);
+    this.share = this.share.bind(this);
     this.setAvatarItems = this.setAvatarItems.bind(this);
   }
 
@@ -42,7 +43,7 @@ class ItemListing extends Component {
 
       });
   }
-
+//this renders the items in the aside
   itemRendering (itemsList, chosenCategory, chosenSubcategory) {
     if (Object.keys(itemsList).length) {
       // console.log("TEST");
@@ -87,27 +88,34 @@ class ItemListing extends Component {
         let category = Object.keys(topItems); //gives back top-level categories
         console.log("Some categories",category);
         this.setState({categoryNames: category});
-        this.setState({selectedCategory: category[0]});
-        this.getSubCategories(category[0], topItems);
+        // this.setState({selectedCategory: category[0]});
+        // this.getSubCategories(category[0], topItems);
   }
 
 
-  getSubCategories(s, topItems=this.state.itemsList){ //default
+  getSubCategories(s){ //default
     console.log('s',s);
-    console.log("subcategory ItemsList", topItems);
-    let itemCategory = Object.keys(topItems[s])
-    this.setState({subCategoryNames: itemCategory, selectedSubcategory: itemCategory[0] });
-    console.log("getSubCategories", Object.keys(topItems[s]));
-    return Object.keys(topItems[s]);
+    console.log("subcategory ItemsList", this.state.itemsList);
+    this.setState({subCategoryNames: Object.keys(this.state.itemsList[s]) });
+    console.log("getSubCategories", Object.keys(this.state.itemsList[s]));
   }
+  // getSubCategories(s, topItems=this.state.itemsList){ //default
+  //   console.log('s',s);
+  //   console.log("subcategory ItemsList", topItems);
+  //   let itemCategory = Object.keys(topItems[s])
+  //   this.setState({subCategoryNames: itemCategory, selectedSubcategory: itemCategory[0] });
+  //   console.log("getSubCategories", Object.keys(topItems[s]));
+  //   return Object.keys(topItems[s]);
+  // }
 
   _handleChange(e){
     console.log("items list", this.state.itemsList);
     this.setState({selectedSubcategory: ""})
     this.setState({selectedCategory: e.target.value}, () => {
-      let subCategory = this.getSubCategories(this.state.selectedCategory);
-      this.setState({selectedSubcategory: subCategory[0] });
-      console.log('is this null',this.state.selectedCategory);
+      // let subCategory = this.getSubCategories(this.state.selectedCategory);
+      this.getSubCategories(this.state.selectedCategory)
+      // this.setState({selectedSubcategory: subCategory[0] });
+      // console.log('is this null',this.state.selectedCategory);
     });
   }
   _handleSubChange(e){
@@ -122,16 +130,25 @@ class ItemListing extends Component {
   _handleClear(){
     this.props.handleClear();
   }
+
+
+  share(e){
+    e.preventDefault();
+    
+    this.props.history.push('/finished');
+  }
   render() {
 
     return (
       <div className = "item-select">
         <aside>
           <h4>Make a selection:</h4>
-            <select onChange={this._handleChange} value={this.state.selectedCategory}>
+            <select onChange={this._handleChange} defaultValue="">
+              <option value="" disabled> </option>
                 {this.state.categoryNames.map((item, index)=> (<option value={item} defaultValue={index === 0 ? true : false} key={item}>{item} </option>))}
             </select>
-            <select onChange={this._handleSubChange} value={this.state.selectedSubcategory}>
+            <select onChange={this._handleSubChange} defaultValue="">
+              <option value="" ></option>
                 {this.state.subCategoryNames.map((item)=> (<option value={item} key={item}>{item} </option>))}
             </select>
           <div className="items-render">
@@ -141,9 +158,9 @@ class ItemListing extends Component {
           </div>
           <div className="studioButtons">
             <button onClick={this._handleSave}> Save </button>
+
             <button onClick={this._handleClear}> Clear </button>
-
-
+            <button onClick={this.share}> Share </button>
           </div>
         </aside>
       </div>
