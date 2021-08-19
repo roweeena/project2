@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import axios from 'axios';
 import history from './history'
 
 class Enter extends Component {
@@ -6,7 +7,7 @@ class Enter extends Component {
     super(props);
     this.state = {
       name: '',
-      class: '',
+      job: '',
       catchphrase:''
     }
     this._handleSubmit = this._handleSubmit.bind(this);
@@ -27,7 +28,7 @@ class Enter extends Component {
     this.setState({name: e.target.value});
   }
   _renderClass(e){
-    this.setState({class: e.target.value});
+    this.setState({job: e.target.value});
   }
   _renderCatchphrase(e){
     this.setState({catchphrase: e.target.value});
@@ -38,9 +39,12 @@ class Enter extends Component {
     e.preventDefault();
     this.props.getInfo(this.state.name); //
     console.log("this.props.getInfo(this.state.name)");
-    this.setState({name: '', catchprase: '', class: ''})
+    this.setState({name: '', catchphrase: '', job: ''});
     this.props.history.push('/create');
-  }
+
+    axios.post('http://localhost:3001/characters', {name: this.state.name,
+    catchphrase: this.state.catchphrase, job: this.state.job, user_id: this.props.user.id}, {withCredentials: true});
+  };
 
 
   render(){
@@ -50,11 +54,11 @@ class Enter extends Component {
       <div className = "enter">
         <div className = "form">
           <h3>Welcome!</h3>
-          <p><small>Type in your character name, class and a catchprase! </small></p>
+          <p><small>Type in your character name, class and a catchphrase! </small></p>
           <form onSubmit={this._handleSubmit}>
             Name:<input type="text" onChange={this._renderName} value={this.state.name} required={true}/>
             <br/>
-            Class: <select onChange={this._renderClass} value={this.state.class}>
+            Class: <select onChange={this._renderClass} value={this.state.job}>
             <option value="Choose an option"></option>
             <option value="magician">Magician</option>
             <option value="thief">Thief</option>

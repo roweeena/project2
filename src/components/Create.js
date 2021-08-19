@@ -18,7 +18,7 @@ class Create extends Component {
     this.characterURL = this.characterURL.bind(this);
 
     const allItems = [{'itemId':2000,'version':'224'},{'itemId':12000,'version':'224'}];
-
+    // axios.get('http://localhost:3001/characters', );
   }
 
 
