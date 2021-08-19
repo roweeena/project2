@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import axios from 'axios'
 import {Link} from 'react-router-dom'
 
+// const SERVERURL = 'https://rpg-generator-backend.herokuapp.com';
+const SERVERURL = 'http://localhost:3001';
 
 class Login extends Component {
   constructor(props) {
@@ -36,7 +38,7 @@ class Login extends Component {
       password: password
     }
 
-    axios.post('https://rpg-generator-backend.herokuapp.com/login', {user}, {withCredentials: true})
+    axios.post(SERVERURL+'/login', {user}, {withCredentials: true})
     .then(response => {
       if (response.data.logged_in) {
         this.props.handleLogin(response.data)

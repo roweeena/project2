@@ -19,6 +19,8 @@ import Account from './Account'
 import history from './history';
 import './css/App.css';
 
+// const SERVERURL = 'https://rpg-generator-backend.herokuapp.com';
+const SERVERURL = 'http://localhost:3001';
 
 class App extends Component {
 constructor(props){
@@ -41,7 +43,7 @@ constructor(props){
    }
 
    handleClick = () => { //logging out
-   axios.delete('https://rpg-generator-backend.herokuapp.com/logout', {withCredentials: true})
+   axios.delete(SERVERURL+'/logout', {withCredentials: true})
    .then(response => {
    this.handleLogout()
    this.history.push('/')
@@ -50,7 +52,7 @@ constructor(props){
    }
 
    loginStatus = () => {
-   axios.get('https://rpg-generator-backend.herokuapp.com/logged_in', {withCredentials: true})
+   axios.get(SERVERURL+'/logged_in', {withCredentials: true})
    .then(response => {
    if (response.data.logged_in) {
      this.handleLogin(response)

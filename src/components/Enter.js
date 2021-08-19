@@ -2,6 +2,9 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import history from './history'
 
+// const SERVERURL = 'https://rpg-generator-backend.herokuapp.com';
+const SERVERURL = 'http://localhost:3001';
+
 class Enter extends Component {
   constructor(props){
     super(props);
@@ -43,7 +46,7 @@ class Enter extends Component {
     this.setState({name: '', catchphrase: '', job: ''});
     this.props.history.push('/create');
 
-    axios.post('http://localhost:3001/characters', {name: this.state.name,
+    axios.post(SERVERURL+'/characters', {name: this.state.name,
     catchphrase: this.state.catchphrase, job: this.state.job, user_id: this.props.user.id}, {withCredentials: true});
   };
 
