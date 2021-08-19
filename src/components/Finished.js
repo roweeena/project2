@@ -14,7 +14,7 @@ import {FacebookShareButton,
 
 class Finished extends Component {
   render(){
-    const url = 'http://localhost:3000/'; //change to deployed url
+    const url = 'https://rpg-generator-backend.herokuapp.com/'; //change to deployed url
    const title = 'RPG Character Creator';
     return(
     <div>

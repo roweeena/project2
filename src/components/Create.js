@@ -46,13 +46,12 @@ class Create extends Component {
       return(
         <div>
           <div className="home" id="create">
-            <div className="test">
-          <h5> {this.props.name}</h5>
-          </div>
+            <h5> {this.props.name}</h5>
+
             <div className="studio">
             <img src={this.characterURL(this.urlGenerator(_.flatten([2000,12000,this.state.itemId])))} alt="item images" />
             </div>
-            <ItemListing avatarItems={ this._handleItemIds } itemId={this.state.itemId} handleClear={this._handleClear}/> 
+            <ItemListing avatarItems={ this._handleItemIds } itemId={this.state.itemId} handleClear={this._handleClear}/>
 
           </div>
 
