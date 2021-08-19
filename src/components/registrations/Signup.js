@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 
+// const SERVERURL = 'https://rpg-generator-backend.herokuapp.com';
+const SERVERURL = 'http://localhost:3001';
 
 class Signup extends Component {
   constructor(props) {
@@ -31,7 +33,7 @@ class Signup extends Component {
       password: password,
       password_confirmation: password_confirmation
     }
-    axios.post('https://rpg-generator-backend.herokuapp.com/users', {user}, {withCredentials: true})
+    axios.post(SERVERURL+'/users', {user}, {withCredentials: true})
     .then(response => {
       if (response.data.status === 'created') {
         this.props.handleLogin(response.data)
