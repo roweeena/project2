@@ -31,20 +31,30 @@ constructor(props){
     name: '',
     class: '',
     catchphrase:'',
-    imgUrl: ''
+    imgUrl: '',
+    character: ''
   };
 }
 
-   componentDidMount(){
-     this.loginStatus()
-   }
+  componentDidMount(){
+   this.loginStatus()
+  }
 
-   getInfo = (data)=>{ //get name of character on enter page
-     this.setState({name: data})
-   }
+  getInfo = (data) => { //get name of character on enter page
+   this.setState({name: data})
+  }
 
+<<<<<<< HEAD
    getImage = (data) =>{
     this.setState({imgUrl: data, name: '', catchphrase: '', class: ''})
+=======
+   getImage = (data) => {
+     this.setState({imgUrl: data})
+>>>>>>> 37eca1a99bdd83bdf59771ea90837d1ab90fc3d4
+   }
+
+   getCharacter = (data) => {
+     this.setState({character: data})
    }
 
    handleClick = () => { //logging out
@@ -56,79 +66,76 @@ constructor(props){
    .catch(error => console.log(error))
    }
 
-   loginStatus = () => {
-   axios.get(SERVERURL+'/logged_in', {withCredentials: true})
-   .then(response => {
-   if (response.data.logged_in) {
+  loginStatus = () => {
+    axios.get(SERVERURL+'/logged_in', {withCredentials: true})
+    .then(response => {
+    if (response.data.logged_in) {
      this.handleLogin(response)
-   } else {
+    } else {
      this.handleLogout()
-   }
-   })
-   .catch(error => console.log('api errors:', error))
-   }
-   handleLogin = (data) => {
-   this.setState({
-   isLoggedIn: true,
-   user: data.user
+    }
     })
+    .catch(error => console.log('api errors:', error))
    }
-   handleLogout = () => {
-   this.setState({
-   isLoggedIn: false,
-   user: {}
-   })
+  handleLogin = (data) => {
+    this.setState({
+    isLoggedIn: true,
+    user: data.user
+    })
+  }
+  handleLogout = () => {
+    this.setState({
+    isLoggedIn: false,
+    user: {}
+    })
+  }
 
-   }
+  render() {
+    return (
+      <div>
+       <Router history={history}>
+         <nav>
+           <ul>
+             <li>
+              <Link to="/"> Home |</Link>
+             </li>
+             <li>
+             {this.state.isLoggedIn ?
+               <Link to="/create">Create |</Link> :
+              null}
 
-   render() {
-   return (
-   <div>
-     <Router history={history}>
-       <nav>
-         <ul>
-           <li>
-            <Link to="/"> Home |</Link>
-           </li>
-           <li>
-           {this.state.isLoggedIn ?
-             <Link to="/create">Create |</Link> :
-            null}
-
-           </li>
-           <li>
-             {!this.state.isLoggedIn ?
-               <Link to="/signup">Sign up |</Link> :
-               null}
-           </li>
-           <li>
-              {!this.state.isLoggedIn ? //shows if you aren't logged in
-               <Link to="/login">Log in</Link> :
-               null}
-           </li>
-           <li>
-             {this.state.isLoggedIn ?  //shows if you are logged in
-               <Link to="/logout" onClick={this.handleClick}>Log Out</Link> :
-               null}
-           </li>
-         </ul>
-       </nav>
-    <div className = "title">
-     <h2><Link to="/">RPG Character Creator</Link></h2>
-    </div>
-    <Switch>
-      <Route
-        exact path='/'
-        render={props => (
-        <Home {...props} handleLogout={this.handleLogout} loggedInStatus={this.state.isLoggedIn}/>
-        )}
-      />
-      {this.state.isLoggedIn &&
-        <Route exact path="/enter" component={(props)=> <Enter {...props} getInfo={this.getInfo} user={this.state.user}/>} />
-      }
+             </li>
+             <li>
+               {!this.state.isLoggedIn ?
+                 <Link to="/signup">Sign up |</Link> :
+                 null}
+             </li>
+             <li>
+                {!this.state.isLoggedIn ? //shows if you aren't logged in
+                 <Link to="/login">Log in</Link> :
+                 null}
+             </li>
+             <li>
+               {this.state.isLoggedIn ?  //shows if you are logged in
+                 <Link to="/logout" onClick={this.handleClick}>Log Out</Link> :
+                 null}
+             </li>
+           </ul>
+         </nav>
+      <div className = "title">
+       <h2><Link to="/">RPG Character Creator</Link></h2>
+      </div>
+      <Switch>
+        <Route exact path='/' render={props => (
+          <Home {...props} handleLogout={this.handleLogout} loggedInStatus={this.state.isLoggedIn}/>
+          )}
+        />
+        {this.state.isLoggedIn &&
+          <Route exact path="/enter" component={(props)=> <Enter {...props} getInfo={this.getInfo} user={this.state.user} getCharacter={this.getCharacter}/>} />
+        }
 
         <Route path="/create">
-          <Create name={this.state.name} isLoggedIn={this.state.isLoggedIn} getImage={this.getImage} />
+          <Create name={this.state.name} isLoggedIn={this.state.isLoggedIn} getImage={this.getImage} character={this.state.character} />
         </Route>
 
         {this.state.isLoggedIn &&
@@ -137,30 +144,30 @@ constructor(props){
       </Route>
     }
         {this.state.isLoggedIn &&
-      <Route path="/account" >
-        <Account user={this.state.user} />
-      </Route>
-    }
+          <Route path="/account" >
+            <Account user={this.state.user} />
+          </Route>
+        }
         <Route
           exact path='/signup'
           render={props => (
           <Signup {...props} handleLogin={this.handleLogin} loggedInStatus={this.state.isLoggedIn}/>
           )}
         />
-       <Route
-         exact path='/login'
-         render={props => (
-         <Login {...props} handleLogin={this.handleLogin} loggedInStatus={this.state.isLoggedIn} getAccount={this.getAccount}/>
-         )}
-       />
-       <Route path='/logout'>
+        <Route
+           exact path='/login'
+           render={props => (
+           <Login {...props} handleLogin={this.handleLogin} loggedInStatus={this.state.isLoggedIn} getAccount={this.getAccount}/>
+           )}
+         />
+        <Route path='/logout'>
 
-         <Logout />
-         </Route >
-     </Switch>
+          <Logout />
+        </Route >
+       </Switch>
 
-   </Router>
-   </div>
+      </Router>
+      </div>
     );
 
 

@@ -1,5 +1,9 @@
 import React, {Component} from 'react';
+import axios from 'axios';
+import _ from 'lodash';
 
+// const SERVERURL = 'https://rpg-generator-backend.herokuapp.com';
+const SERVERURL = 'http://localhost:3001';
 
 class Account extends Component {
 
@@ -8,26 +12,100 @@ class Account extends Component {
     this.state = {
       username: '',
       email: '',
+      character: []
      };
+
+     // let someCharacters = [];
+     // // axios.get(SERVERURL+`/users/${this.props.user.id}`, {withCredentials: true}).then(response => {
+     // axios.get(SERVERURL+`/users/41`, {withCredentials: true}).then(response => {
+     //   if (response.data) {
+     //     console.log("Character Info", response.data);
+     //     someCharacters = response.data.character;
+     //     this.setState({character: response.data.character})
+     //   } else {
+     //     this.setState({
+     //       errors: response.data.errors
+     //     })
+     //   }
+     //   console.log("someCharacters", someCharacters);
+     //   console.log("state Characters", this.state.character);
+     // });
+
+     // this.getCharacters = this.getCharacters.bind(this);
   }
+
+
+componentDidMount() {
+  const fetchCharacters = () => {
+      console.log('fetching chars');
+      axios.get(SERVERURL+`/users/41`, {withCredentials: true}).then((results) => {
+        this.setState({ character: results.data.character });
+        console.log("Results.data", results.data);
+        console.log("This state from fetchCharacters", this.state.character);
+      });
+    };
+    fetchCharacters();
+}
+
+// getCharacters() {
+//   let someCharacters = [];
+//   // axios.get(SERVERURL+`/users/${this.props.user.id}`, {withCredentials: true}).then(response => {
+//   axios.get(SERVERURL+`/users/41`, {withCredentials: true}).then(response => {
+//     console.log("Character Info", response.data);
+//     someCharacters = response.data.character;
+//     this.setState({character: response.data.character})
+//
+//     console.log("someCharacters", someCharacters);
+//   });
+// }
+
+
+
+// {this.state.character.map((item)=> (<li  value={item} key={item}>{item} </li>))}
 
 // loop through characters saved in account
   render(){
     return(
       <div className="home">
       Your account
-      <div className="account">
-        <p>Name: <small>{this.props.user && this.props.user.username}</small></p>
+        <div className="account">
+          <p>Name: <small>{this.props.user && this.props.user.username}</small></p>
 
-        <p>Email: <small> {this.props.user && this.props.user.email}</small></p>
+          <p>Email: <small> {this.props.user && this.props.user.email}</small></p>
 
-        <p>Saved characters:</p>
-          <div>
-          </div>
-      </div>
+          <p>Saved characters:</p>
+          <CharacterResults character={this.state.character} />
+            <div>
+            <p>{}</p>
+            <p>{}</p>
+              <ul>
+                {}
+                <li></li>
+              </ul>
+            </div>
+
+        </div>
       </div>
     )
   }
+}
+const CharacterResults = (props) => {
+  console.log("Props", props.character);
+
+
+  return (
+    <div>
+    <h1>Character Search Results</h1>
+      {props.character.map(filteredCharacter => (
+        <li key={ filteredCharacter.id }>
+          Name: {filteredCharacter.name},
+          Class: {filteredCharacter.job},
+          Catchphrase: {filteredCharacter.catchphrase},          
+          <br/>
+        </li>
+      ))}
+    </div>
+  );
 }
 
 export default Account

@@ -41,13 +41,13 @@ class Create extends Component {
       this.setState({itemId: newItemId});
       this.props.getImage(this.characterURL(this.urlGenerator(_.flatten([2000,12000,newItemId]))));
       console.log("_handleItemIds", this.state.itemId);
-    }
+  }
 
-    _handleClear(e){
-      this.setState({
-        itemId: []
-      })
-    }
+  _handleClear(e){
+    this.setState({
+      itemId: []
+    })
+  }
 
   render(){
     if (this.props.isLoggedIn) {
@@ -58,7 +58,7 @@ class Create extends Component {
             <div className="studio">
             <img src={this.characterURL(this.urlGenerator(_.flatten([2000,12000,this.state.itemId])))} alt="character image" />
             </div>
-            <ItemListing avatarItems={ this._handleItemIds } itemId={this.state.itemId} handleClear={this._handleClear}/>
+            <ItemListing avatarItems={ this._handleItemIds } itemId={this.state.itemId} handleClear={this._handleClear} character={this.props.character}/>
 
           </div>
 

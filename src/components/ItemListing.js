@@ -3,6 +3,9 @@ import _ from 'lodash';
 import axios from 'axios';
 import Finished from './Finished'
 
+// const SERVERURL = 'https://rpg-generator-backend.herokuapp.com';
+const SERVERURL = 'http://localhost:3001';
+
 class ItemListing extends Component {
   constructor(props) {
     super(props);
@@ -23,6 +26,7 @@ class ItemListing extends Component {
     this._handleSubChange = this._handleSubChange.bind(this);
     this._handleClear = this._handleClear.bind(this);
     this.setAvatarItems = this.setAvatarItems.bind(this);
+    this._handleSave = this._handleSave.bind(this);
   }
 
   componentDidMount(){
@@ -132,6 +136,8 @@ class ItemListing extends Component {
   }
 
   _handleSave(){
+    console.log(this.props.itemId);
+    axios.put(SERVERURL+`/characters/${this.props.character.id}`, {items: this.props.itemId.join(',')});
     console.log('save')
   }
 
