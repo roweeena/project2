@@ -31,7 +31,8 @@ constructor(props){
     name: '',
     class: '',
     catchphrase:'',
-    imgUrl: ''
+    imgUrl: '',
+    character: ''
   };
 }
 
@@ -39,12 +40,16 @@ constructor(props){
    this.loginStatus()
   }
 
-  getInfo = (data)=>{ //get name of character on enter page
+  getInfo = (data) => { //get name of character on enter page
    this.setState({name: data})
   }
 
-   getImage = (data) =>{
+   getImage = (data) => {
      this.setState({imgUrl: data})
+   }
+
+   getCharacter = (data) => {
+     this.setState({character: data})
    }
 
    handleClick = () => { //logging out
@@ -121,11 +126,11 @@ constructor(props){
           )}
         />
         {this.state.isLoggedIn &&
-          <Route exact path="/enter" component={(props)=> <Enter {...props} getInfo={this.getInfo} user={this.state.user}/>} />
+          <Route exact path="/enter" component={(props)=> <Enter {...props} getInfo={this.getInfo} user={this.state.user} getCharacter={this.getCharacter}/>} />
         }
 
         <Route path="/create">
-          <Create name={this.state.name} isLoggedIn={this.state.isLoggedIn} getImage={this.getImage} />
+          <Create name={this.state.name} isLoggedIn={this.state.isLoggedIn} getImage={this.getImage} character={this.state.character} />
         </Route>
 
         {this.state.isLoggedIn &&

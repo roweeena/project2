@@ -47,8 +47,17 @@ class Enter extends Component {
     this.props.history.push('/create');
 
 
+
     axios.post(SERVERURL+'/characters', {name: this.state.name,
-    catchphrase: this.state.catchphrase, job: this.state.job, user_id: this.props.user.id}, {withCredentials: true});
+    catchphrase: this.state.catchphrase, job: this.state.job, user_id: this.props.user.id}, {withCredentials: true}).then(response => {
+      if (response.data.character) {
+        this.props.getCharacter(response.data.character)
+      } else {
+        this.setState({
+          errors: response.data.errors
+        })
+      }
+    });
   };
 
 
