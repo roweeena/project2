@@ -137,7 +137,7 @@ class ItemListing extends Component {
 
   _handleSave(){
     console.log(this.props.itemId);
-    axios.put(SERVERURL+'/characters/60', {items: this.props.itemId.join(',')});
+    axios.put(SERVERURL+`/characters/${this.props.character.id}`, {items: this.props.itemId.join(',')});
     console.log('save')
   }
 
