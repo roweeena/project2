@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import history from './history'
 
 class Enter extends Component {
   constructor(props){

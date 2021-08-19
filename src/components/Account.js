@@ -1,6 +1,4 @@
 import React, {Component} from 'react';
-import Signup from './registrations/Signup'
-import Login from './registrations/Login'
 
 
 class Account extends Component {

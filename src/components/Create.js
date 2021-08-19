@@ -1,7 +1,5 @@
 import React, {Component} from 'react';
 import _ from 'lodash';
-import history from './history'
-import Enter from './Enter'
 import ItemListing from './ItemListing'
 
 class Create extends Component {
@@ -16,8 +14,8 @@ class Create extends Component {
     }
 
     this.characterURL = this.characterURL.bind(this);
-
-    const allItems = [{'itemId':2000,'version':'224'},{'itemId':12000,'version':'224'}];
+    this._handleClear = this._handleClear.bind(this)
+    // const allItems = [{'itemId':2000,'version':'224'},{'itemId':12000,'version':'224'}];
 
   }
 
@@ -39,6 +37,12 @@ class Create extends Component {
       console.log("_handleItemIds", this.state.itemId);
     }
 
+    _handleClear(e){
+      this.setState({
+        itemId: []
+      })
+    }
+
   render(){
     if (this.props.isLoggedIn) {
       return(
@@ -48,12 +52,15 @@ class Create extends Component {
           <h5> {this.props.name}</h5>
           </div>
             <div className="studio">
-
-            <img src={this.characterURL(this.urlGenerator(_.flatten([2000,12000,this.state.itemId])))} />
+            <img src={this.characterURL(this.urlGenerator(_.flatten([2000,12000,this.state.itemId])))} alt="item images" />
             </div>
-            <ItemListing avatarItems={ this._handleItemIds }/>
-
+            <ItemListing avatarItems={ this._handleItemIds } itemId={this.state.itemId}/>
+      
+              <div className="studioButtons">
+                <button onClick={this._handleClear}> Clear </button>
+              </div>
           </div>
+
         </div>
       )
     } else {
