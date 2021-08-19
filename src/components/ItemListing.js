@@ -113,6 +113,7 @@ class ItemListing extends Component {
 
   _handleChange(e){
     console.log("items list", this.state.itemsList);
+    this.setState({selectedSubcategory: ""});
     this.setState({selectedCategory: e.target.value}, () => {
       this.getSubCategories(this.state.selectedCategory);
       console.log('is this null',this.state.selectedCategory);
@@ -144,12 +145,12 @@ class ItemListing extends Component {
       <div className = "item-select">
         <aside>
           <h4>Make a selection:</h4>
-            <select onChange={this._handleChange}>
-              <option selected="true" disabled="disabled"> </option>
+            <select onChange={this._handleChange} defaultValue="">
+              <option value="" disabled> </option>
                 {this.state.categoryNames.map((item)=> (<option  value={item} key={item}>{item} </option>))}
             </select>
-            <select onChange={this._handleSubChange} >
-              <option selected="true" disabled="disabled"></option>
+            <select onChange={this._handleSubChange} defaultValue="">
+              <option value="" ></option>
                 {this.state.subCategoryNames.map((item)=> (<option  value={item} key={item}>{item} </option>))}
             </select>
           <div className="items-render">
