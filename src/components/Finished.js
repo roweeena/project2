@@ -22,6 +22,8 @@ class Finished extends Component {
       <div className = "home">
         <h2>{this.props.name}</h2>
           <img src={this.props.imgUrl} alt="Finished product"/>
+          <p>{this.props.class}</p>
+          <p>{this.props.catchphrase}</p>
           <h5>Share your avatar</h5>
           <div className = "socials">
           <FacebookShareButton url={url} quote={title} >

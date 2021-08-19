@@ -139,6 +139,10 @@ class ItemListing extends Component {
     this.props.handleClear();
   }
 
+  _handleShare(){
+    
+  }
+
   render() {
 
     return (

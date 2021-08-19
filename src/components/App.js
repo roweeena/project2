@@ -44,7 +44,7 @@ constructor(props){
    }
 
    getImage = (data) =>{
-     this.setState({imgUrl: data})
+    this.setState({imgUrl: data, name: '', catchphrase: '', class: ''})
    }
 
    handleClick = () => { //logging out
