@@ -4,10 +4,11 @@ import _ from 'lodash';
 import axios from 'axios';
 
 class ItemListing extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       items: [],
+      itemsId: props.itemId,
       itemsList: {},
       categoryNames: [],
       subCategoryNames: [],
@@ -20,6 +21,7 @@ class ItemListing extends Component {
     this.getSubCategories = this.getSubCategories.bind(this);
     this._handleChange = this._handleChange.bind(this);
     this._handleSubChange = this._handleSubChange.bind(this);
+    this._handleClear = this._handleClear.bind(this);
     this.setAvatarItems = this.setAvatarItems.bind(this);
   }
 
@@ -116,8 +118,10 @@ class ItemListing extends Component {
   _handleSave(){
     console.log('save')
   }
-  
 
+  _handleClear(){
+    this.props.handleClear();
+  }
   render() {
 
     return (
@@ -137,6 +141,8 @@ class ItemListing extends Component {
           </div>
           <div className="studioButtons">
             <button onClick={this._handleSave}> Save </button>
+            <button onClick={this._handleClear}> Clear </button>
+
 
           </div>
         </aside>

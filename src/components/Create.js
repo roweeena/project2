@@ -14,9 +14,7 @@ class Create extends Component {
     }
 
     this.characterURL = this.characterURL.bind(this);
-    this._handleClear = this._handleClear.bind(this)
-    // const allItems = [{'itemId':2000,'version':'224'},{'itemId':12000,'version':'224'}];
-
+    this._handleClear = this._handleClear.bind(this);
   }
 
   urlGenerator (array) {
@@ -54,11 +52,8 @@ class Create extends Component {
             <div className="studio">
             <img src={this.characterURL(this.urlGenerator(_.flatten([2000,12000,this.state.itemId])))} alt="item images" />
             </div>
-            <ItemListing avatarItems={ this._handleItemIds } itemId={this.state.itemId}/>
-      
-              <div className="studioButtons">
-                <button onClick={this._handleClear}> Clear </button>
-              </div>
+            <ItemListing avatarItems={ this._handleItemIds } itemId={this.state.itemId} handleClear={this._handleClear}/> //prop name in orange
+
           </div>
 
         </div>
