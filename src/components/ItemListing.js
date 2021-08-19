@@ -22,7 +22,6 @@ class ItemListing extends Component {
     this._handleChange = this._handleChange.bind(this);
     this._handleSubChange = this._handleSubChange.bind(this);
     this._handleClear = this._handleClear.bind(this);
-    this.share = this.share.bind(this);
     this.setAvatarItems = this.setAvatarItems.bind(this);
   }
 
@@ -140,12 +139,6 @@ class ItemListing extends Component {
     this.props.handleClear();
   }
 
-
-  share(e){
-    e.preventDefault();
-
-    this.props.history.push('/finished');
-  }
   render() {
 
     return (

@@ -30,14 +30,16 @@ class Create extends Component {
     return characterImage;
   }
 
-  characterURL (name, url) {
+  characterURL (name ) {
+    let url = `https://maplestory.io/api/character/${name}/stand1/0?showears=false&showLefEars=false&showHighLefEars=undefined&resize=1&name=&flipX=false&bgColor=0,0,0,0`
+    return url;
 
-    return `https://maplestory.io/api/character/${name}/stand1/0?showears=false&showLefEars=false&showHighLefEars=undefined&resize=1&name=&flipX=false&bgColor=0,0,0,0`;
-  
   }
 
   _handleItemIds = (itemValue) => {
-      this.setState({itemId: [...this.state.itemId, itemValue]});
+      const newItemId = [...this.state.itemId, itemValue]
+      this.setState({itemId: newItemId});
+      this.props.getImage(this.characterURL(this.urlGenerator(_.flatten([2000,12000,newItemId]))));
       console.log("_handleItemIds", this.state.itemId);
     }
 
@@ -47,14 +49,12 @@ class Create extends Component {
       })
     }
 
-
   render(){
     if (this.props.isLoggedIn) {
       return(
         <div>
+        <h5> {this.props.name}</h5>
           <div className="home" id="create">
-            <h5> {this.props.name}</h5>
-
             <div className="studio">
             <img src={this.characterURL(this.urlGenerator(_.flatten([2000,12000,this.state.itemId])))} alt="character image" />
             </div>

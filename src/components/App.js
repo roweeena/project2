@@ -28,7 +28,8 @@ constructor(props){
     user: {},
     name: '',
     class: '',
-    catchphrase:''
+    catchphrase:'',
+    imgUrl: ''
   };
 }
 
@@ -38,6 +39,10 @@ constructor(props){
 
    getInfo = (data)=>{ //get name of character on enter page
      this.setState({name: data})
+   }
+
+   getImage = (data) =>{
+     this.setState({imgUrl: data})
    }
 
    handleClick = () => { //logging out
@@ -121,12 +126,12 @@ constructor(props){
       }
 
         <Route path="/create">
-          <Create name={this.state.name} isLoggedIn={this.state.isLoggedIn} />
+          <Create name={this.state.name} isLoggedIn={this.state.isLoggedIn} getImage={this.getImage} />
         </Route>
 
         {this.state.isLoggedIn &&
       <Route path="/finished">
-        <Finished get={this.state.itemId}/>
+        <Finished get={this.state.itemId} imgUrl={this.state.imgUrl}/>
       </Route>
     }
         {this.state.isLoggedIn &&
