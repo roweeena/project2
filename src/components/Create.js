@@ -33,7 +33,7 @@ class Create extends Component {
   characterURL (name, url) {
 
     return `https://maplestory.io/api/character/${name}/stand1/0?showears=false&showLefEars=false&showHighLefEars=undefined&resize=1&name=&flipX=false&bgColor=0,0,0,0`;
-    this.setState({img: url  })
+  
   }
 
   _handleItemIds = (itemValue) => {
