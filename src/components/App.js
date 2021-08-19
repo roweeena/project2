@@ -117,7 +117,7 @@ constructor(props){
         )}
       />
       {this.state.isLoggedIn &&
-        <Route exact path="/enter" component={(props)=> <Enter {...props} getInfo={this.getInfo}/>} />
+        <Route exact path="/enter" component={(props)=> <Enter {...props} getInfo={this.getInfo} user={this.state.user}/>} />
       }
 
         <Route path="/create">

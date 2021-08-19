@@ -93,7 +93,16 @@ class ItemListing extends Component {
   }
 
 
-  getSubCategories(s){ //default
+  _handleChange(e){
+    console.log("items list", this.state.itemsList);
+    this.setState({selectedSubcategory: ""});
+    this.setState({selectedCategory: e.target.value}, () => {
+      this.getSubCategories(this.state.selectedCategory);
+      console.log('is this null',this.state.selectedCategory);
+    });
+  }
+
+  getSubCategories(s){
     console.log('s',s);
     console.log("subcategory ItemsList", this.state.itemsList);
     this.setState({subCategoryNames: Object.keys(this.state.itemsList[s]) });
@@ -134,7 +143,7 @@ class ItemListing extends Component {
 
   share(e){
     e.preventDefault();
-    
+
     this.props.history.push('/finished');
   }
   render() {
@@ -145,11 +154,11 @@ class ItemListing extends Component {
           <h4>Make a selection:</h4>
             <select onChange={this._handleChange} defaultValue="">
               <option value="" disabled> </option>
-                {this.state.categoryNames.map((item, index)=> (<option value={item} defaultValue={index === 0 ? true : false} key={item}>{item} </option>))}
+                {this.state.categoryNames.map((item)=> (<option  value={item} key={item}>{item} </option>))}
             </select>
             <select onChange={this._handleSubChange} defaultValue="">
               <option value="" ></option>
-                {this.state.subCategoryNames.map((item)=> (<option value={item} key={item}>{item} </option>))}
+                {this.state.subCategoryNames.map((item)=> (<option  value={item} key={item}>{item} </option>))}
             </select>
           <div className="items-render">
             {this.state.selectedCategory && this.state.selectedSubcategory ?
