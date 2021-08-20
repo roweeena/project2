@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import _ from 'lodash';
 import axios from 'axios';
 import Finished from './Finished'
+import history from './history'
 
 // const SERVERURL = 'https://rpg-generator-backend.herokuapp.com';
 const SERVERURL = 'http://localhost:3001';
@@ -27,8 +28,13 @@ class ItemListing extends Component {
     this._handleClear = this._handleClear.bind(this);
     this.setAvatarItems = this.setAvatarItems.bind(this);
     this._handleSave = this._handleSave.bind(this);
+    this.getInfo = this.getInfo.bind(this);
+    this._handleShare = this._handleShare.bind(this);
   }
 
+  getInfo = (data) => {
+    this.setState({name: data})
+  }
   componentDidMount(){
     let characterItems = {};
     axios.get('https://maplestory.io/api/GMS/224/item/category/equip')
@@ -146,6 +152,7 @@ class ItemListing extends Component {
   }
 
   _handleShare(){
+    this.props.history.push('/finished');
     
   }
 
@@ -172,7 +179,7 @@ class ItemListing extends Component {
             <button onClick={this._handleSave}> Save </button>
 
             <button onClick={this._handleClear}> Clear </button>
-            <button onClick={this.share}> Share </button>
+            <button onClick={this._handleShare}> Share </button>
           </div>
         </aside>
       </div>

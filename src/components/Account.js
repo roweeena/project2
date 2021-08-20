@@ -73,16 +73,7 @@ componentDidMount() {
 
           <p>Email: <small> {this.props.user && this.props.user.email}</small></p>
 
-          <p>Saved characters:</p>
           <CharacterResults character={this.state.character} />
-            <div>
-            <p>{}</p>
-            <p>{}</p>
-              <ul>
-                {}
-                <li></li>
-              </ul>
-            </div>
 
         </div>
       </div>
@@ -95,12 +86,12 @@ const CharacterResults = (props) => {
 
   return (
     <div>
-    <h1>Character Search Results</h1>
+    <p>Saved characters:</p>
       {props.character.map(filteredCharacter => (
         <li key={ filteredCharacter.id }>
           Name: {filteredCharacter.name},
           Class: {filteredCharacter.job},
-          Catchphrase: {filteredCharacter.catchphrase},          
+          Catchphrase: {filteredCharacter.catchphrase}
           <br/>
         </li>
       ))}

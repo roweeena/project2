@@ -18,6 +18,7 @@ class Create extends Component {
 
     this.characterURL = this.characterURL.bind(this);
     this._handleClear = this._handleClear.bind(this);
+    this._handleShare = this._handleShare.bind(this);
   }
 
   urlGenerator (array) {
@@ -48,6 +49,10 @@ class Create extends Component {
       itemId: []
     })
   }
+  _handleShare(){
+    this.props.history.push('/finished');
+
+  }
 
   render(){
     if (this.props.isLoggedIn) {
@@ -58,7 +63,7 @@ class Create extends Component {
             <div className="studio">
             <img src={this.characterURL(this.urlGenerator(_.flatten([2000,12000,this.state.itemId])))} alt="character image" />
             </div>
-            <ItemListing avatarItems={ this._handleItemIds } itemId={this.state.itemId} handleClear={this._handleClear} character={this.props.character}/>
+            <ItemListing history={this.props.history} avatarItems={ this._handleItemIds } itemId={this.state.itemId} handleClear={this._handleClear} character={this.props.character}/>
 
           </div>
 

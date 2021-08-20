@@ -13,6 +13,15 @@ import {FacebookShareButton,
 
 
 class Finished extends Component {
+  constructor(){
+    super();
+    this.state={
+      name:'',
+      catchphrase: '',
+      class: ''
+    }
+  }
+
 
   render(){
     const url = 'https://roweeena.github.io/project2'; //change to deployed url

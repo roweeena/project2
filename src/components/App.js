@@ -44,13 +44,8 @@ constructor(props){
    this.setState({name: data})
   }
 
-<<<<<<< HEAD
-   getImage = (data) =>{
-    this.setState({imgUrl: data, name: '', catchphrase: '', class: ''})
-=======
    getImage = (data) => {
      this.setState({imgUrl: data})
->>>>>>> 37eca1a99bdd83bdf59771ea90837d1ab90fc3d4
    }
 
    getCharacter = (data) => {
@@ -101,9 +96,20 @@ constructor(props){
              </li>
              <li>
              {this.state.isLoggedIn ?
-               <Link to="/create">Create |</Link> :
+               <Link to="/enter">Create |</Link> :
               null}
 
+             </li>
+             <li>
+             {this.state.isLoggedIn ?
+               <Link to="/account">Account |</Link> :
+              null}
+
+             </li>
+             <li>
+               {this.state.isLoggedIn ?  //shows if you are logged in
+                 <Link to="/logout" onClick={this.handleClick}>Log Out</Link> :
+                 null}
              </li>
              <li>
                {!this.state.isLoggedIn ?
@@ -115,16 +121,12 @@ constructor(props){
                  <Link to="/login">Log in</Link> :
                  null}
              </li>
-             <li>
-               {this.state.isLoggedIn ?  //shows if you are logged in
-                 <Link to="/logout" onClick={this.handleClick}>Log Out</Link> :
-                 null}
-             </li>
            </ul>
          </nav>
       <div className = "title">
        <h2><Link to="/">RPG Character Creator</Link></h2>
       </div>
+
       <Switch>
         <Route exact path='/' render={props => (
           <Home {...props} handleLogout={this.handleLogout} loggedInStatus={this.state.isLoggedIn}/>
@@ -133,14 +135,14 @@ constructor(props){
         {this.state.isLoggedIn &&
           <Route exact path="/enter" component={(props)=> <Enter {...props} getInfo={this.getInfo} user={this.state.user} getCharacter={this.getCharacter}/>} />
         }
+        {this.state.isLoggedIn &&
+        <Route exact path="/create" component={(props) => <Create {...props} name={this.state.name} isLoggedIn={this.state.isLoggedIn} getImage={this.getImage} character={this.state.character}/> } />
+          }
 
-        <Route path="/create">
-          <Create name={this.state.name} isLoggedIn={this.state.isLoggedIn} getImage={this.getImage} character={this.state.character} />
-        </Route>
 
         {this.state.isLoggedIn &&
       <Route path="/finished">
-        <Finished get={this.state.itemId} imgUrl={this.state.imgUrl}/>
+        <Finished get={this.state.itemId} imgUrl={this.state.imgUrl} getInfo={this.getInfo}/>
       </Route>
     }
         {this.state.isLoggedIn &&
@@ -167,6 +169,8 @@ constructor(props){
        </Switch>
 
       </Router>
+
+      <footer>Copyright 2021</footer>
       </div>
     );
 
