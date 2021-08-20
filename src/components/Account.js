@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import _ from 'lodash';
+// import {Link} from 'react-router-dom';
+import history from './history'
 
 // const SERVERURL = 'https://rpg-generator-backend.herokuapp.com';
 const SERVERURL = 'http://localhost:3001';
@@ -15,30 +17,14 @@ class Account extends Component {
       character: []
      };
 
-     // let someCharacters = [];
-     // // axios.get(SERVERURL+`/users/${this.props.user.id}`, {withCredentials: true}).then(response => {
-     // axios.get(SERVERURL+`/users/41`, {withCredentials: true}).then(response => {
-     //   if (response.data) {
-     //     console.log("Character Info", response.data);
-     //     someCharacters = response.data.character;
-     //     this.setState({character: response.data.character})
-     //   } else {
-     //     this.setState({
-     //       errors: response.data.errors
-     //     })
-     //   }
-     //   console.log("someCharacters", someCharacters);
-     //   console.log("state Characters", this.state.character);
-     // });
-
-     // this.getCharacters = this.getCharacters.bind(this);
+    // this._handleClick = this._handleClick.bind(this);
   }
 
 
 componentDidMount() {
   const fetchCharacters = () => {
       console.log('fetching chars');
-      axios.get(SERVERURL+`/users/41`, {withCredentials: true}).then((results) => {
+      axios.get(SERVERURL+`/users/40`, {withCredentials: true}).then((results) => {
         this.setState({ character: results.data.character });
         console.log("Results.data", results.data);
         console.log("This state from fetchCharacters", this.state.character);
@@ -46,6 +32,7 @@ componentDidMount() {
     };
     fetchCharacters();
 }
+
 
 // getCharacters() {
 //   let someCharacters = [];
@@ -74,7 +61,7 @@ componentDidMount() {
           <p>Email: <small> {this.props.user && this.props.user.email}</small></p>
 
           <p>Saved characters:</p>
-          <CharacterResults character={this.state.character} />
+          <CharacterResults character={this.state.character} click={this._handleClick} />
             <div>
             <p>{}</p>
             <p>{}</p>
@@ -89,23 +76,45 @@ componentDidMount() {
     )
   }
 }
-const CharacterResults = (props) => {
-  console.log("Props", props.character);
+
+class CharacterResults extends Component {
+  constructor() {
+    super();
+    this.state = { character: []};
+
+    this._handleDelete = this._handleDelete.bind(this);
+
+  }
 
 
-  return (
-    <div>
-    <h1>Character Search Results</h1>
-      {props.character.map(filteredCharacter => (
-        <li key={ filteredCharacter.id }>
-          Name: {filteredCharacter.name},
-          Class: {filteredCharacter.job},
-          Catchphrase: {filteredCharacter.catchphrase},          
-          <br/>
-        </li>
-      ))}
-    </div>
-  );
+  _handleDelete = (id) => {
+
+    console.log("This is _handleDelete", id);
+    axios.delete(SERVERURL+`/characters/${id}`);
+
+  }
+
+  render() {
+    return(
+      <div>
+      <h1>Character Search Results</h1>
+        {this.props.character.map(filteredCharacter => (
+          <li key={ filteredCharacter.id } onClick={() => {this._handleClick(filteredCharacter.id)}}>
+
+            Name:<button onClick={console.log("hi")}>
+             {filteredCharacter.name}</button>,
+              Class: {filteredCharacter.job},
+            Catchphrase: {filteredCharacter.catchphrase},
+            <button onClick={() => {this._handleDelete(filteredCharacter.id)}}> Delete Character</button>
+            <br/>
+          </li>
+        ))}
+      </div>
+    );
+  }
+
+
+
 }
 
 export default Account
