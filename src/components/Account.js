@@ -61,7 +61,7 @@ componentDidMount() {
           <p>Email: <small> {this.props.user && this.props.user.email}</small></p>
 
           <p>Saved characters:</p>
-          <CharacterResults character={this.state.character} click={this._handleClick} />
+          <CharacterResults character={this.state.character} componentDidMount={this.componentDidMount} />
             <div>
             <p>{}</p>
             <p>{}</p>
