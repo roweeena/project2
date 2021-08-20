@@ -86,7 +86,7 @@ class CharacterResults extends Component {
   render() {
     return(
       <div>
-      <h1>Character Search Results</h1>
+      <p>Saved characters:</p>
         {this.props.character.map(filteredCharacter => (
           <li key={ filteredCharacter.id } onClick={() => {this._handleClick(filteredCharacter.id)}}>
 

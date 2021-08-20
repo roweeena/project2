@@ -21,20 +21,17 @@ class ItemListing extends Component {
     }
     // this.fetchIcon = this.fetchIcon.bind(this);
     this.itemRendering = this.itemRendering.bind(this);
-    this.getCategories = this.getCategories.bind(this);
-    this.getSubCategories = this.getSubCategories.bind(this);
-    this._handleChange = this._handleChange.bind(this);
-    this._handleSubChange = this._handleSubChange.bind(this);
-    this._handleClear = this._handleClear.bind(this);
-    this.setAvatarItems = this.setAvatarItems.bind(this);
-    this._handleSave = this._handleSave.bind(this);
-    this.getInfo = this.getInfo.bind(this);
+   this.getCategories = this.getCategories.bind(this);
+   this.getSubCategories = this.getSubCategories.bind(this);
+   this._handleChange = this._handleChange.bind(this);
+   this._handleSubChange = this._handleSubChange.bind(this);
+   this._handleClear = this._handleClear.bind(this);
+   this.setAvatarItems = this.setAvatarItems.bind(this);
+   this._handleSave = this._handleSave.bind(this);
     this._handleShare = this._handleShare.bind(this);
   }
 
-  getInfo = (data) => {
-    this.setState({name: data})
-  }
+
   componentDidMount(){
     let characterItems = {};
     axios.get('https://maplestory.io/api/GMS/224/item/category/equip')
@@ -53,36 +50,36 @@ class ItemListing extends Component {
       });
   }
 //this renders the items in the aside
-  itemRendering (itemsList, chosenCategory, chosenSubcategory) {
-    if (Object.keys(itemsList).length) {
-      // console.log("TEST");
-      // console.log(itemsList[chosenCategory][chosenSubcategory]);
-      let itemsArray = itemsList[chosenCategory][chosenSubcategory].slice(0,100);
-      // console.log(itemsArray);
+itemRendering (itemsList, chosenCategory, chosenSubcategory) {
+ if (Object.keys(itemsList).length) {
+   // console.log("TEST");
+   // console.log(itemsList[chosenCategory][chosenSubcategory]);
+   let itemsArray = itemsList[chosenCategory][chosenSubcategory].slice(0,100);
+   // console.log(itemsArray);
 
-      let imageArray = itemsArray.map(item => {
-        // console.log(item.id);
-        return <a href="" key={item.id}><img src={this.characterURL(item.id)} key={this.characterURL(item.id)}alt="Maplestory item" onClick={(event) => {
-          this.setAvatarItems(event, item.id);
-        }} /> </a>
-        // return <button><img src={this.characterURL(item.id)} alt="alt text" key={this.characterURL(item.id)} onClick={this.setAvatarItems} /> </button>
-      });
-      return imageArray;
-    }
-  }
+   let imageArray = itemsArray.map(item => {
+     // console.log(item.id);
+     return <a href="" key={item.id}><img src={this.characterURL(item.id)} key={this.characterURL(item.id)}alt="Maplestory item" onClick={(event) => {
+       this.setAvatarItems(event, item.id);
+     }} /> </a>
+     // return <button><img src={this.characterURL(item.id)} alt="alt text" key={this.characterURL(item.id)} onClick={this.setAvatarItems} /> </button>
+   });
+   return imageArray;
+ }
+}
 
-  urlGenerator (array) {
-    let results = [];
-    array.map(id => {
-      results.push(`${ this.state }`);
-    })
-    console.log(results.join(","));
-    return results.join(",");
-  }
+urlGenerator (array) {
+  let results = [];
+  array.map(id => {
+    results.push(`${ this.state }`);
+  })
+  console.log(results.join(","));
+  return results.join(",");
+}
 
-  characterURL (name) {
-    return `https://maplestory.io/api/GMS/224/item/${name}/icon`;
-  }
+characterURL (name) {
+  return `https://maplestory.io/api/GMS/224/item/${name}/icon`;
+}
 
   setAvatarItems(event,itemId) {
     event.preventDefault();
@@ -153,31 +150,30 @@ class ItemListing extends Component {
 
   _handleShare(){
     this.props.history.push('/finished');
-    
-  }
 
+  }
+  
   render() {
 
-    return (
-      <div className = "item-select">
-        <aside>
-          <h4>Make a selection:</h4>
-            <select onChange={this._handleChange} defaultValue="">
-              <option value="" disabled> </option>
-                {this.state.categoryNames.map((item)=> (<option  value={item} key={item}>{item} </option>))}
-            </select>
-            <select onChange={this._handleSubChange} defaultValue="">
-              <option value="" ></option>
-                {this.state.subCategoryNames.map((item)=> (<option  value={item} key={item}>{item} </option>))}
-            </select>
-          <div className="items-render">
-            {this.state.selectedCategory && this.state.selectedSubcategory ?
-            this.itemRendering(this.state.itemsList, this.state.selectedCategory, this.state.selectedSubcategory) : null}
+      return (
+        <div className = "item-select">
+          <aside>
+            <h4>Make a selection:</h4>
+              <select onChange={this._handleChange} defaultValue="">
+                <option value="" disabled> </option>
+                  {this.state.categoryNames.map((item)=> (<option  value={item} key={item}>{item} </option>))}
+              </select>
+              <select onChange={this._handleSubChange} defaultValue="">
+                <option value="" ></option>
+                  {this.state.subCategoryNames.map((item)=> (<option  value={item} key={item}>{item} </option>))}
+              </select>
+            <div className="items-render">
+              {this.state.selectedCategory && this.state.selectedSubcategory ?
+              this.itemRendering(this.state.itemsList, this.state.selectedCategory, this.state.selectedSubcategory) : null}
 
-          </div>
+            </div>
           <div className="studioButtons">
             <button onClick={this._handleSave}> Save </button>
-
             <button onClick={this._handleClear}> Clear </button>
             <button onClick={this._handleShare}> Share </button>
           </div>
