@@ -4,8 +4,8 @@ import _ from 'lodash';
 // import {Link} from 'react-router-dom';
 import history from './history'
 
-// const SERVERURL = 'https://rpg-generator-backend.herokuapp.com';
-const SERVERURL = 'http://localhost:3001';
+const SERVERURL = 'https://rpg-generator-backend.herokuapp.com';
+// const SERVERURL = 'http://localhost:3001';
 
 class Account extends Component {
 

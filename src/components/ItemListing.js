@@ -4,8 +4,8 @@ import axios from 'axios';
 import Finished from './Finished'
 import history from './history'
 
-// const SERVERURL = 'https://rpg-generator-backend.herokuapp.com';
-const SERVERURL = 'http://localhost:3001';
+const SERVERURL = 'https://rpg-generator-backend.herokuapp.com';
+// const SERVERURL = 'http://localhost:3001';
 
 class ItemListing extends Component {
   constructor(props) {
@@ -152,7 +152,7 @@ characterURL (name) {
     this.props.history.push('/finished');
 
   }
-  
+
   render() {
 
       return (

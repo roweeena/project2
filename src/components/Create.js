@@ -4,8 +4,8 @@ import axios from 'axios';
 import ItemListing from './ItemListing'
 import Finished from './Finished'
 
-// const SERVERURL = 'https://rpg-generator-backend.herokuapp.com';
-const SERVERURL = 'http://localhost:3001';
+const SERVERURL = 'https://rpg-generator-backend.herokuapp.com';
+// const SERVERURL = 'http://localhost:3001';
 
 class Create extends Component {
   constructor(props){

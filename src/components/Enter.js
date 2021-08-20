@@ -2,8 +2,8 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import history from './history'
 
-// const SERVERURL = 'https://rpg-generator-backend.herokuapp.com';
-const SERVERURL = 'http://localhost:3001';
+const SERVERURL = 'https://rpg-generator-backend.herokuapp.com';
+// const SERVERURL = 'http://localhost:3001';
 
 class Enter extends Component {
   constructor(props){
