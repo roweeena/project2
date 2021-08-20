@@ -1,8 +1,11 @@
 import React, {Component} from 'react';
 import _ from 'lodash';
+import axios from 'axios';
 import ItemListing from './ItemListing'
 import Finished from './Finished'
 
+// const SERVERURL = 'https://rpg-generator-backend.herokuapp.com';
+const SERVERURL = 'http://localhost:3001';
 
 class Create extends Component {
   constructor(props){
@@ -41,6 +44,9 @@ class Create extends Component {
       const newItemId = [...this.state.itemId, itemValue]
       this.setState({itemId: newItemId});
       this.props.getImage(this.characterURL(this.urlGenerator(_.flatten([2000,12000,newItemId]))));
+      // this.setState(this.characterURL(this.urlGenerator(_.flatten([2000,12000,newItemId]))));
+      axios.put(SERVERURL+`/characters/${this.props.character.id}`,
+        {image: this.characterURL(this.urlGenerator(_.flatten([2000,12000,newItemId])))});
       console.log("_handleItemIds", this.state.itemId);
   }
 
