@@ -73,17 +73,18 @@ urlGenerator (array) {
   array.map(id => {
     results.push(`${ this.state }`);
   })
-  console.log(results.join(","));
+  // console.log(results.join(","));
   return results.join(",");
 }
 
 characterURL (name) {
+  // console.log('characterUrl', `https://maplestory.io/api/GMS/224/item/${name}/icon`)
   return `https://maplestory.io/api/GMS/224/item/${name}/icon`;
 }
 
   setAvatarItems(event,itemId) {
     event.preventDefault();
-    console.log("HEY FROM setAvatarItems", event, itemId);
+    console.log("HEY FROM setAvatarItems", itemId);
     // this.props.onClick(itemId);
     this.setState({items: itemId});
     this.props.avatarItems(itemId);
@@ -92,7 +93,7 @@ characterURL (name) {
 
   getCategories(topItems) {
         let category = Object.keys(topItems); //gives back top-level categories
-        console.log("Some categories",category);
+        // console.log("Some categories",category);
         this.setState({categoryNames: category});
         // this.setState({selectedCategory: category[0]});
         // this.getSubCategories(category[0], topItems);
@@ -100,19 +101,19 @@ characterURL (name) {
 
 
   _handleChange(e){
-    console.log("items list", this.state.itemsList);
+    // console.log("items list", this.state.itemsList);
     this.setState({selectedSubcategory: ""});
     this.setState({selectedCategory: e.target.value}, () => {
       this.getSubCategories(this.state.selectedCategory);
-      console.log('is this null',this.state.selectedCategory);
+      // console.log('is this null',this.state.selectedCategory);
     });
   }
 
   getSubCategories(s){
-    console.log('s',s);
-    console.log("subcategory ItemsList", this.state.itemsList);
+    // console.log('s',s);
+    // console.log("subcategory ItemsList", this.state.itemsList);
     this.setState({subCategoryNames: Object.keys(this.state.itemsList[s]) });
-    console.log("getSubCategories", Object.keys(this.state.itemsList[s]));
+    // console.log("getSubCategories", Object.keys(this.state.itemsList[s]));
   }
   // getSubCategories(s, topItems=this.state.itemsList){ //default
   //   console.log('s',s);
@@ -124,7 +125,7 @@ characterURL (name) {
   // }
 
   _handleChange(e){
-    console.log("items list", this.state.itemsList);
+    // console.log("items list", this.state.itemsList);
     this.setState({selectedSubcategory: ""})
     this.setState({selectedCategory: e.target.value}, () => {
       // let subCategory = this.getSubCategories(this.state.selectedCategory);
@@ -135,13 +136,13 @@ characterURL (name) {
   }
   _handleSubChange(e){
     this.setState({selectedSubcategory: e.target.value});
-    console.log("_handleSubChange");
+    // console.log("_handleSubChange");
   }
 
   _handleSave(){
-    console.log(this.props.itemId);
+    // console.log(this.props.itemId);
     axios.put(SERVERURL+`/characters/${this.props.character.id}`, {items: this.props.itemId.join(',')});
-    console.log('save')
+    // console.log('save')
   }
 
   _handleClear(){

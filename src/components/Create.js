@@ -29,13 +29,14 @@ class Create extends Component {
     array.map(id => {
       results.push(`{'itemId':${ id },'version':'224'}`);
     })
-    console.log(results.join(","));
+    // console.log(results.join(","));
     const characterImage = results.join(",")
     return characterImage;
   }
 
   characterURL (name ) {
     let url = `https://maplestory.io/api/character/${name}/stand1/0?showears=false&showLefEars=false&showHighLefEars=undefined&resize=1&name=&flipX=false&bgColor=0,0,0,0`
+    // console.log('character render', url )
     return url;
 
   }
