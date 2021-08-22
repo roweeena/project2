@@ -19,8 +19,8 @@ import Account from './Account'
 import history from './history';
 import './css/App.css';
 
-// const SERVERURL = 'https://rpg-generator-backend.herokuapp.com';
-const SERVERURL = 'http://localhost:3001';
+const SERVERURL = 'https://rpg-generator-backend.herokuapp.com';
+// const SERVERURL = 'http://localhost:3001';
 
 class App extends Component {
 constructor(props){

@@ -2,8 +2,8 @@ import React, {Component} from 'react';
 import axios from 'axios'
 import {Link} from 'react-router-dom'
 
-// const SERVERURL = 'https://rpg-generator-backend.herokuapp.com';
-const SERVERURL = 'http://localhost:3001';
+const SERVERURL = 'https://rpg-generator-backend.herokuapp.com';
+// const SERVERURL = 'http://localhost:3001';
 
 class Login extends Component {
   constructor(props) {
@@ -26,6 +26,7 @@ class Login extends Component {
 
   handleChange = (event) => {
     const {name, value} = event.target
+    console.log('name, value', name, value)
     this.setState({
       [name]: value
     })

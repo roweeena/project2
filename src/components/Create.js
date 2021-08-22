@@ -4,8 +4,8 @@ import axios from 'axios';
 import ItemListing from './ItemListing'
 import Finished from './Finished'
 
-// const SERVERURL = 'https://rpg-generator-backend.herokuapp.com';
-const SERVERURL = 'http://localhost:3001';
+const SERVERURL = 'https://rpg-generator-backend.herokuapp.com';
+// const SERVERURL = 'http://localhost:3001';
 
 class Create extends Component {
   constructor(props){
@@ -21,6 +21,7 @@ class Create extends Component {
 
     this.characterURL = this.characterURL.bind(this);
     this._handleClear = this._handleClear.bind(this);
+    this._handleShare = this._handleShare.bind(this);
   }
 
   urlGenerator (array) {
@@ -28,13 +29,14 @@ class Create extends Component {
     array.map(id => {
       results.push(`{'itemId':${ id },'version':'224'}`);
     })
-    console.log(results.join(","));
+    // console.log(results.join(","));
     const characterImage = results.join(",")
     return characterImage;
   }
 
   characterURL (name ) {
     let url = `https://maplestory.io/api/character/${name}/stand1/0?showears=false&showLefEars=false&showHighLefEars=undefined&resize=1&name=&flipX=false&bgColor=0,0,0,0`
+    // console.log('character render', url )
     return url;
 
   }
@@ -54,6 +56,10 @@ class Create extends Component {
       itemId: []
     })
   }
+  _handleShare(){
+    this.props.history.push('/finished');
+
+  }
 
   render(){
     if (this.props.isLoggedIn) {
@@ -64,7 +70,7 @@ class Create extends Component {
             <div className="studio">
             <img src={this.characterURL(this.urlGenerator(_.flatten([2000,12000,this.state.itemId])))} alt="character image" />
             </div>
-            <ItemListing avatarItems={ this._handleItemIds } itemId={this.state.itemId} handleClear={this._handleClear} character={this.props.character}/>
+            <ItemListing history={this.props.history} avatarItems={ this._handleItemIds } itemId={this.state.itemId} handleClear={this._handleClear} character={this.props.character}/>
 
           </div>
 

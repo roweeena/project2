@@ -4,8 +4,8 @@ import _ from 'lodash';
 // import {Link} from 'react-router-dom';
 import history from './history'
 
-// const SERVERURL = 'https://rpg-generator-backend.herokuapp.com';
-const SERVERURL = 'http://localhost:3001';
+const SERVERURL = 'https://rpg-generator-backend.herokuapp.com';
+// const SERVERURL = 'http://localhost:3001';
 
 class Account extends Component {
 
@@ -60,16 +60,9 @@ componentDidMount() {
 
           <p>Email: <small> {this.props.user && this.props.user.email}</small></p>
 
-          <p>Saved characters:</p>
-          <CharacterResults character={this.state.character} fetchCharacters={this.fetchCharacters} />
-            <div>
-            <p>{}</p>
-            <p>{}</p>
-              <ul>
-                {}
-                <li></li>
-              </ul>
-            </div>
+
+          <CharacterResults character={this.state.character} componentDidMount={this.componentDidMount} />
+
 
         </div>
       </div>
@@ -85,8 +78,6 @@ class CharacterResults extends Component {
     this._handleDelete = this._handleDelete.bind(this);
 
   }
-
-
   _handleDelete = (id) => {
 
     console.log("This is _handleDelete", id);
@@ -97,14 +88,14 @@ class CharacterResults extends Component {
   render() {
     return(
       <div>
-      <h1>Character Search Results</h1>
+      <p>Saved characters:</p>
         {this.props.character.map(filteredCharacter => (
           <li key={ filteredCharacter.id } onClick={() => {this._handleClick(filteredCharacter.id)}}>
 
             Name:<button onClick={console.log("hi")}>
              {filteredCharacter.name}</button>,
               Class: {filteredCharacter.job},
-            Catchphrase: {filteredCharacter.catchphrase},
+            Catchphrase: {filteredCharacter.catchphrase}
             <button onClick={() => {this._handleDelete(filteredCharacter.id)}}> Delete Character</button>
             <br/>
           </li>
