@@ -28,7 +28,7 @@ class ItemListing extends Component {
    this._handleClear = this._handleClear.bind(this);
    this.setAvatarItems = this.setAvatarItems.bind(this);
    this._handleSave = this._handleSave.bind(this);
-    this._handleUndo = this._handleUndo.bind(this);
+   this._handleUndo = this._handleUndo.bind(this);
   }
 
 
@@ -149,6 +149,9 @@ characterURL (name) {
   _handleClear(){
     this.props.handleClear();
   }
+  _handleUndo(){
+    this.props.handleUndo();
+  }
 
 
 
@@ -175,6 +178,7 @@ characterURL (name) {
             <button onClick={this._handleSave}> Save </button>
             <button onClick={this._handleClear}> Clear </button>
             <button onClick={this._handleUndo}> Undo </button>
+
 
           </div>
         </aside>

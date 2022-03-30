@@ -75,11 +75,11 @@ class Enter extends Component {
             <br/>
             Class: <select onChange={this._renderClass} value={this.state.job}>
             <option value="Choose an option"></option>
-            <option value="magician">Magician</option>
-            <option value="thief">Thief</option>
-            <option value="warrior">Warrior</option>
-            <option value="bowman">Bowman</option>
-            <option value="pirate">Pirate</option>
+            <option value="Magician">Magician</option>
+            <option value="Thief">Thief</option>
+            <option value="Warrior">Warrior</option>
+            <option value="Bowman">Bowman</option>
+            <option value="Pirate">Pirate</option>
             </select>
             <br/>
             Catchphrase:<input type="text" onChange={this._renderCatchphrase} value={this.state.catchphrase}/>

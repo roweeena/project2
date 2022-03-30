@@ -59,8 +59,11 @@ li {
   height: 80vh;
   position:relative;
 }
-#create.home {
-  display:flex;
+#create{
+    display:flex;
+}
+.home {
+
   justify-content: center;
   background-color: rgba(255, 255, 255, 0.9);
   margin: 0 auto;

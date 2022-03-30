@@ -21,7 +21,7 @@ class Create extends Component {
 
     this.characterURL = this.characterURL.bind(this);
     this._handleClear = this._handleClear.bind(this);
-    this._handleShare = this._handleShare.bind(this);
+    this._handleUndo = this._handleUndo.bind(this);
   }
 
   urlGenerator (array) {
@@ -56,21 +56,35 @@ class Create extends Component {
       itemId: []
     })
   }
-  _handleShare(){
-    this.props.history.push('/finished');
 
+
+  _handleUndo(){
+//console.log(this.state.itemId.length);
+
+     const lastItem = this.state.itemId[this.state.itemId.length -1]
+     console.log(lastItem);
+    const filteredItems = this.state.itemId.filter(item => item !== lastItem)
+    this.setState({
+      itemId: filteredItems
+    })
   }
 
   render(){
     if (this.props.isLoggedIn) {
       return(
-        <div>
-        <h5> {this.props.name}</h5>
-          <div className="home" id="create">
-            <div className="studio">
-            <img src={this.characterURL(this.urlGenerator(_.flatten([2000,12000,this.state.itemId])))} alt="character image" />
+        <div className="home">
+
+
+          <div  id="create">
+          <div>
+            <h5>Name: {this.props.name}</h5>
+            <p> Job: {this.props.character.job}</p>
+            <p> Catchphrase: {this.props.character.catchphrase}</p>
             </div>
-            <ItemListing history={this.props.history} avatarItems={ this._handleItemIds } itemId={this.state.itemId} handleClear={this._handleClear} character={this.props.character}/>
+            <div className="studio">
+              <img src={this.characterURL(this.urlGenerator(_.flatten([2000,12000,this.state.itemId])))} alt="character image" />
+              </div>
+              <ItemListing history={this.props.history} avatarItems={ this._handleItemIds } itemId={this.state.itemId} handleClear={this._handleClear} handleUndo={this._handleUndo} character={this.props.character}/>
 
           </div>
 
