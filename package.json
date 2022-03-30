@@ -17,6 +17,7 @@
     "react-share": "^4.4.0",
     "react-share-social": "^0.1.48",
     "underscore": "^1.13.1",
+    "vue-notifications": "^1.0.2",
     "web-vitals": "^1.1.2"
   },
   "scripts": {

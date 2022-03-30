@@ -28,7 +28,7 @@ class ItemListing extends Component {
    this._handleClear = this._handleClear.bind(this);
    this.setAvatarItems = this.setAvatarItems.bind(this);
    this._handleSave = this._handleSave.bind(this);
-    this._handleShare = this._handleShare.bind(this);
+    this._handleUndo = this._handleUndo.bind(this);
   }
 
 
@@ -142,6 +142,7 @@ characterURL (name) {
   _handleSave(){
     // console.log(this.props.itemId);
     axios.put(SERVERURL+`/characters/${this.props.character.id}`, {items: this.props.itemId.join(',')});
+    this.props.history.push('/finished');
     // console.log('save')
   }
 
@@ -149,10 +150,7 @@ characterURL (name) {
     this.props.handleClear();
   }
 
-  _handleShare(){
-    this.props.history.push('/finished');
 
-  }
 
   render() {
 
@@ -176,7 +174,8 @@ characterURL (name) {
           <div className="studioButtons">
             <button onClick={this._handleSave}> Save </button>
             <button onClick={this._handleClear}> Clear </button>
-            <button onClick={this._handleShare}> Share </button>
+            <button onClick={this._handleUndo}> Undo </button>
+
           </div>
         </aside>
       </div>

@@ -20,6 +20,12 @@ class Login extends Component {
     return this.props.loggedInStatus ? this.redirect() : null
   }
 
+  componentDidMount() {
+    const password = localStorage.getItem('password') === 'true';
+    const email = password ? localStorage.getItem('email') : '';
+    this.setState({ email, password });
+}
+
   getAccount(data){
     this.setState({email: data})
   }
@@ -38,6 +44,9 @@ class Login extends Component {
       email: email,
       password: password
     }
+
+    localStorage.setItem('password', password);
+    localStorage.setItem('email', email ? email : '');
 
     axios.post(SERVERURL+'/login', {user}, {withCredentials: true})
     .then(response => {

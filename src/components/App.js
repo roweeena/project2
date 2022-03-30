@@ -73,6 +73,7 @@ constructor(props){
     .catch(error => console.log('api errors:', error))
    }
   handleLogin = (data) => {
+    console.log(data);
     this.setState({
     isLoggedIn: true,
     user: data.user
@@ -83,6 +84,8 @@ constructor(props){
     isLoggedIn: false,
     user: {}
     })
+    localStorage.removeItem('password')
+    localStorage.removeItem('email')
   }
 
   render() {
